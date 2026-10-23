@@ -1,6 +1,6 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { Avatar, Button, Layout, Menu, Space, Tag, Typography } from 'antd'
-import { AppstoreOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons'
+import { AppstoreOutlined, BankOutlined, LogoutOutlined, ShoppingOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons'
 import { useAuth } from '../auth/AuthContext'
 
 const { Header, Sider, Content } = Layout
@@ -10,7 +10,12 @@ export default function AppLayout() {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const itens = [{ key: '/', icon: <AppstoreOutlined />, label: 'Funil de vendas' }]
+  const itens = [
+    { key: '/', icon: <AppstoreOutlined />, label: 'Funil de vendas' },
+    { key: '/empresas', icon: <BankOutlined />, label: 'Empresas' },
+    { key: '/contatos', icon: <TeamOutlined />, label: 'Contatos' },
+    { key: '/produtos', icon: <ShoppingOutlined />, label: 'Produtos' },
+  ]
 
   function sair() {
     logout()

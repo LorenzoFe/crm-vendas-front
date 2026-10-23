@@ -104,3 +104,16 @@ body {
   margin-top: 8px;
   font-size: 12px;
 }
+
+.pagina-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.filtros {
+  margin-bottom: 16px;
+}

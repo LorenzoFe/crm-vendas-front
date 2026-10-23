@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { DndContext, PointerSensor, useDraggable, useDroppable, useSensor, useSensors } from '@dnd-kit/core'
-import { Alert, Badge, Card, Empty, Spin, Typography, message } from 'antd'
+import { Alert, App, Badge, Card, Empty, Spin, Typography } from 'antd'
 import { api, mensagemDeErro } from '../api/client'
 import { useAuth } from '../auth/AuthContext'
 import { formatarData, formatarMoeda } from '../utils/formatar'
@@ -65,6 +65,7 @@ function ColunaEstagio({ estagio, podeArrastar }) {
 }
 
 export default function Kanban() {
+  const { message } = App.useApp()
   const { temPermissao } = useAuth()
   const [estagios, setEstagios] = useState([])
   const [carregando, setCarregando] = useState(true)
