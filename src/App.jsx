@@ -6,6 +6,10 @@ import Kanban from './pages/Kanban'
 import Empresas from './pages/Empresas'
 import Contatos from './pages/Contatos'
 import Produtos from './pages/Produtos'
+import Oportunidades from './pages/Oportunidades'
+import OportunidadeDetalhe from './pages/OportunidadeDetalhe'
+import Painel from './pages/Painel'
+import Tarefas from './pages/Tarefas'
 
 export default function App() {
   return (
@@ -14,6 +18,10 @@ export default function App() {
       <Route element={<RotaProtegida />}>
         <Route element={<AppLayout />}>
           <Route path="/" element={<Kanban />} />
+          <Route path="/painel" element={<Painel />} />
+          <Route path="/tarefas" element={<Tarefas />} />
+          <Route path="/oportunidades" element={<Oportunidades />} />
+          <Route path="/oportunidades/:id" element={<OportunidadeDetalhe />} />
           <Route path="/empresas" element={<Empresas />} />
           <Route path="/contatos" element={<Contatos />} />
           <Route path="/produtos" element={<Produtos />} />

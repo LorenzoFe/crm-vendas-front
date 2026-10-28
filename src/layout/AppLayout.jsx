@@ -1,6 +1,6 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { Avatar, Button, Layout, Menu, Space, Tag, Typography } from 'antd'
-import { AppstoreOutlined, BankOutlined, LogoutOutlined, ShoppingOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons'
+import { AppstoreOutlined, BankOutlined, CheckSquareOutlined, DashboardOutlined, DollarOutlined, LogoutOutlined, ShoppingOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons'
 import { useAuth } from '../auth/AuthContext'
 
 const { Header, Sider, Content } = Layout
@@ -12,6 +12,9 @@ export default function AppLayout() {
 
   const itens = [
     { key: '/', icon: <AppstoreOutlined />, label: 'Funil de vendas' },
+    { key: '/painel', icon: <DashboardOutlined />, label: 'Painel' },
+    { key: '/oportunidades', icon: <DollarOutlined />, label: 'Oportunidades' },
+    { key: '/tarefas', icon: <CheckSquareOutlined />, label: 'Tarefas' },
     { key: '/empresas', icon: <BankOutlined />, label: 'Empresas' },
     { key: '/contatos', icon: <TeamOutlined />, label: 'Contatos' },
     { key: '/produtos', icon: <ShoppingOutlined />, label: 'Produtos' },
@@ -29,7 +32,7 @@ export default function AppLayout() {
         <Menu
           theme="dark"
           mode="inline"
-          selectedKeys={[location.pathname]}
+          selectedKeys={[location.pathname.startsWith('/oportunidades') ? '/oportunidades' : location.pathname]}
           items={itens}
           onClick={({ key }) => navigate(key)}
         />
