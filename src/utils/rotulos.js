@@ -35,3 +35,9 @@ export const PRIORIDADE_TAREFA = {
 export function opcoesDe(mapa) {
   return Object.entries(mapa).map(([value, v]) => ({ value, label: typeof v === 'string' ? v : v.texto }))
 }
+
+export const ROLES = {
+  ADMIN: { texto: 'Administrador', cor: 'purple' },
+  GERENTE: { texto: 'Gerente', cor: 'blue' },
+  VENDEDOR: { texto: 'Vendedor', cor: 'cyan' },
+}

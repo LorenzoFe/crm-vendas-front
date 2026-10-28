@@ -10,6 +10,7 @@ import Oportunidades from './pages/Oportunidades'
 import OportunidadeDetalhe from './pages/OportunidadeDetalhe'
 import Painel from './pages/Painel'
 import Tarefas from './pages/Tarefas'
+import Usuarios from './pages/Usuarios'
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/empresas" element={<Empresas />} />
           <Route path="/contatos" element={<Contatos />} />
           <Route path="/produtos" element={<Produtos />} />
+          <Route path="/config/usuarios" element={<Usuarios />} />
         </Route>
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
