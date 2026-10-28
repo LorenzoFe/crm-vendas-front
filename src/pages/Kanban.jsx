@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { DndContext, PointerSensor, useDraggable, useDroppable, useSensor, useSensors } from '@dnd-kit/core'
 import { Alert, App, Badge, Card, Empty, Spin, Typography } from 'antd'
 import { api, mensagemDeErro } from '../api/client'
@@ -6,6 +7,7 @@ import { useAuth } from '../auth/AuthContext'
 import { formatarData, formatarMoeda } from '../utils/formatar'
 
 function CartaoOportunidade({ oportunidade, podeArrastar }) {
+  const navigate = useNavigate()
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
     id: oportunidade.id,
     disabled: !podeArrastar,
@@ -20,7 +22,7 @@ function CartaoOportunidade({ oportunidade, podeArrastar }) {
 
   return (
     <div ref={setNodeRef} style={estilo} {...listeners} {...attributes}>
-      <Card size="small" className="cartao">
+      <Card size="small" className="cartao" hoverable onClick={() => navigate(`/oportunidades/${oportunidade.id}`)}>
         <Typography.Text strong>{oportunidade.titulo}</Typography.Text>
         <div className="cartao-linha">{oportunidade.empresaNome}</div>
         {oportunidade.contatoNome && <div className="cartao-linha">{oportunidade.contatoNome}</div>}

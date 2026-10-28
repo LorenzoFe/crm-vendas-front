@@ -31,3 +31,40 @@ export function useOpcoesEmpresas() {
   }, [])
   return opcoes
 }
+
+export function useOpcoesEstagios() {
+  const [estagios, setEstagios] = useState([])
+  useEffect(() => {
+    api
+      .get('/estagios')
+      .then(({ data }) => setEstagios(data))
+      .catch(() => setEstagios([]))
+  }, [])
+  return estagios
+}
+
+export function useOpcoesProdutos() {
+  const [produtos, setProdutos] = useState([])
+  useEffect(() => {
+    api
+      .get('/produtos', { params: { size: 200, sort: 'nome,asc', ativo: true } })
+      .then(({ data }) => setProdutos(data.content))
+      .catch(() => setProdutos([]))
+  }, [])
+  return produtos
+}
+
+export function useOpcoesContatos(empresaId) {
+  const [opcoes, setOpcoes] = useState([])
+  useEffect(() => {
+    if (!empresaId) {
+      setOpcoes([])
+      return
+    }
+    api
+      .get(`/empresas/${empresaId}/contatos`, { params: { size: 100 } })
+      .then(({ data }) => setOpcoes(data.content.map((c) => ({ value: c.id, label: c.nome }))))
+      .catch(() => setOpcoes([]))
+  }, [empresaId])
+  return opcoes
+}
