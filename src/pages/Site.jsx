@@ -193,7 +193,9 @@ function Hero({ id }) {
         </div>
       </div>
       <h1>
-        Reduza o <span className="sem-quebra">speed-to-lead</span>
+        Reduza o
+        <br />
+        <span className="sem-quebra">speed-to-lead</span>
         <br />
         para menos de 5s
       </h1>
