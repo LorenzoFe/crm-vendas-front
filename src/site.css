@@ -2503,3 +2503,17 @@ img.site-app-icone {
     transform: scale(var(--escala));
   }
 }
+
+.site-hero-conteudo p {
+  max-width: 580px;
+}
+
+/* Hero mais curto (sem prova social): reposiciona logos e suaviza o fade só no fim. */
+.site-hero .site-orbita-icone.o4 { top: 420px; }
+.site-hero .site-orbita-icone.o5 { right: 15%; top: 96px; }
+.site-hero .site-orbita-icone.o8 { top: 440px; }
+
+.site-hero .site-orbita {
+  -webkit-mask-image: linear-gradient(#000 82%, transparent 100%);
+  mask-image: linear-gradient(#000 82%, transparent 100%);
+}

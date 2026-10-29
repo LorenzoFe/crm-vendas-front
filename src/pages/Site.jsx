@@ -100,18 +100,6 @@ function Logo({ claro = false }) {
   )
 }
 
-function Avatares() {
-  return (
-    <div className="site-avatares">
-      {['#1677ff', '#ff7a45', '#13c2c2', '#722ed1'].map((cor) => (
-        <span key={cor} style={{ background: cor }}>
-          <UserOutlined />
-        </span>
-      ))}
-    </div>
-  )
-}
-
 function LogoMarca({ logo }) {
   if (logo.id === 'linkedin') {
     return <span className="site-marca-in">in</span>
@@ -169,23 +157,16 @@ function BotaoVidro({ to, children }) {
 function Hero({ id }) {
   return (
     <div className="site-hero-conteudo" id={id}>
-      <div className="site-prova">
-        <Avatares />
-        <div>
-          <strong>+300 mil</strong>
-          <small>ligações realizadas</small>
-        </div>
-      </div>
       <h1>
-        Reduza o
+        Ligue automaticamente
         <br />
-        <span className="sem-quebra">speed-to-lead</span>
+        para seus leads
         <br />
-        para menos de 5s
+        em menos de 5s
       </h1>
       <p>
-        O CRM de inbound feito para pré-vendas. O lead preenche o formulário e a discadora já liga,
-        enquanto ele ainda está com o seu site aberto.
+        Reduza seu tempo de contato para menos de 5s com uma plataforma que integra VoIP e seu canal
+        inbound em um único fluxo de vendas.
       </p>
       <div className="site-botoes">
         <Link to="/login" className="site-btn escuro">
