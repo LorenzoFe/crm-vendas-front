@@ -38,6 +38,21 @@ export const STATUS_INTERESSE = {
   DESCARTADO: { texto: 'Descartado', cor: 'default' },
 }
 
+// Situação do interesse na fila do discador (Vonix)
+export const STATUS_DISCADOR = {
+  PENDENTE: { texto: 'Aguardando envio', cor: 'default' },
+  SEM_TELEFONE: { texto: 'Sem telefone', cor: 'default' },
+  NA_FILA: { texto: 'Na fila', cor: 'processing' },
+  ATENDIDO: { texto: 'Atendido', cor: 'green' },
+  CAIXA_POSTAL: { texto: 'Caixa postal', cor: 'gold' },
+  NAO_ATENDIDO: { texto: 'Não atendido', cor: 'orange' },
+  ERRO: { texto: 'Erro no envio', cor: 'red' },
+  REMOVIDO: { texto: 'Removido da fila', cor: 'default' },
+}
+
+// Situações em que faz sentido mandar de novo para o discador
+export const DISCADOR_PODE_REENVIAR = ['PENDENTE', 'ERRO', 'NAO_ATENDIDO', 'CAIXA_POSTAL']
+
 export const PREFERENCIA_CONTATO = {
   EMAIL: 'E-mail',
   TELEFONE: 'Telefone',
