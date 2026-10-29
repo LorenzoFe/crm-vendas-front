@@ -21,6 +21,7 @@ import {
   ThunderboltOutlined,
   UserOutlined,
 } from '@ant-design/icons'
+import SiteTriptico from './SiteTriptico'
 import '../site.css'
 
 // Landing page pública do Córtex. Estrutura baseada na referência aprovada pelo Moises;
@@ -634,6 +635,8 @@ export default function Site() {
           ))}
         </div>
       </section>
+
+      <SiteTriptico />
 
       <Bento />
       <ComoFunciona />
