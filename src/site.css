@@ -1159,21 +1159,24 @@
   font-family: 'Fustat', 'Inter', sans-serif;
 }
 
-/* Navbar flutuante de vidro */
+/* Menu clean: logo à esquerda, páginas à direita, sem vidro. Fica por cima do hero. */
 
 .site-menu {
-  top: 30px;
-  width: fit-content;
-  max-width: calc(100% - 32px);
-  gap: 48px;
-  margin: 30px auto 0;
-  padding: 10px 10px 10px 20px;
-  border: 1px solid var(--vidro-borda);
-  border-radius: 16px;
-  background: var(--vidro);
-  backdrop-filter: blur(50px);
-  -webkit-backdrop-filter: blur(50px);
-  box-shadow: var(--vidro-luz), 0 10px 30px rgba(11, 27, 51, 0.06);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: auto;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 24px;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.site-menu nav {
+  gap: 36px;
 }
 
 .site-btn.vidro-claro {
@@ -1225,9 +1228,7 @@
 /* Brilho azul no canto + textura de grão */
 
 .site-hero {
-  padding-top: 24px;
-  margin-top: -100px;
-  padding-top: 140px;
+  padding-top: 120px;
   background: #fff;
   overflow: hidden;
 }
@@ -1496,15 +1497,15 @@
 
 @media (max-width: 900px) {
   .site-menu {
-    gap: 16px;
+    justify-content: center;
   }
 
   .site-hero-grade {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .site-hero-conteudo.lado h1 {
-    font-size: 44px;
+    font-size: 40px;
     letter-spacing: -1px;
   }
 
@@ -2450,9 +2451,18 @@
 
 @media (max-width: 900px) {
   .demo {
-    transform: scale(0.62);
-    transform-origin: top center;
+    justify-self: start;
     height: 320px;
-    margin-bottom: 0;
+    margin-left: calc(50% - 270px);
+    transform: scale(0.62);
+    transform-origin: 270px 0;
   }
+}
+
+.site-botoes {
+  flex-wrap: wrap;
+}
+
+.site-btn {
+  white-space: nowrap;
 }

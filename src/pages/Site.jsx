@@ -609,9 +609,6 @@ export default function Site() {
             </a>
           ))}
         </nav>
-        <Link to="/login" className="site-btn vidro-claro pequeno">
-          Entrar <ArrowRightOutlined />
-        </Link>
       </header>
 
       <section className="site-hero">
