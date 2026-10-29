@@ -32,6 +32,33 @@ export const PRIORIDADE_TAREFA = {
   BAIXA: { texto: 'Baixa', cor: 'default' },
 }
 
+export const STATUS_INTERESSE = {
+  NOVO: { texto: 'Novo', cor: 'gold' },
+  CONVERTIDO: { texto: 'Convertido', cor: 'green' },
+  DESCARTADO: { texto: 'Descartado', cor: 'default' },
+}
+
+export const STATUS_DISCADOR = {
+  PENDENTE: { texto: 'Aguardando envio', cor: 'default' },
+  SEM_TELEFONE: { texto: 'Sem telefone', cor: 'default' },
+  NA_FILA: { texto: 'Na fila', cor: 'processing' },
+  ATENDIDO: { texto: 'Atendido', cor: 'green' },
+  CAIXA_POSTAL: { texto: 'Caixa postal', cor: 'gold' },
+  NAO_ATENDIDO: { texto: 'Não atendido', cor: 'orange' },
+  ERRO: { texto: 'Erro no envio', cor: 'red' },
+  REMOVIDO: { texto: 'Removido da fila', cor: 'default' },
+}
+
+export const DISCADOR_PODE_REENVIAR = ['PENDENTE', 'ERRO', 'NAO_ATENDIDO', 'CAIXA_POSTAL']
+
+export const PREFERENCIA_CONTATO = {
+  EMAIL: 'E-mail',
+  TELEFONE: 'Telefone',
+  WHATSAPP: 'WhatsApp',
+}
+
+export const TAMANHOS_EMPRESA = ['Startup', 'PME', 'Grande', 'Corporação']
+
 export function opcoesDe(mapa) {
   return Object.entries(mapa).map(([value, v]) => ({ value, label: typeof v === 'string' ? v : v.texto }))
 }

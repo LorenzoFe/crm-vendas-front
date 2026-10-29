@@ -1,6 +1,6 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { Avatar, Button, Layout, Menu, Space, Tag, Typography } from 'antd'
-import { AppstoreOutlined, BankOutlined, CheckSquareOutlined, DashboardOutlined, DollarOutlined, LogoutOutlined, ShoppingOutlined, TeamOutlined, UserOutlined, UserSwitchOutlined } from '@ant-design/icons'
+import { AppstoreOutlined, BankOutlined, CheckSquareOutlined, DashboardOutlined, DollarOutlined, InboxOutlined, LogoutOutlined, ShoppingOutlined, TeamOutlined, UserOutlined, UserSwitchOutlined } from '@ant-design/icons'
 import { useAuth } from '../auth/AuthContext'
 
 const { Header, Sider, Content } = Layout
@@ -19,6 +19,9 @@ export default function AppLayout() {
     { key: '/contatos', icon: <TeamOutlined />, label: 'Contatos' },
     { key: '/produtos', icon: <ShoppingOutlined />, label: 'Produtos' },
   ]
+  if (temPermissao('ver_oportunidade')) {
+    itens.splice(4, 0, { key: '/interessados', icon: <InboxOutlined />, label: 'Interessados' })
+  }
   if (temPermissao('gerenciar_usuarios')) {
     itens.push({ key: '/config/usuarios', icon: <UserSwitchOutlined />, label: 'Usuários' })
   }

@@ -8,6 +8,11 @@ export const api = axios.create({
   timeout: 120000,
 })
 
+export const apiPublica = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
+  timeout: 120000,
+})
+
 export function salvarSessao(token, usuario) {
   localStorage.setItem(CHAVE_TOKEN, token)
   localStorage.setItem(CHAVE_USUARIO, JSON.stringify(usuario))
