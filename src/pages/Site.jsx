@@ -231,44 +231,6 @@ function DemoIntegracao() {
   )
 }
 
-function MockPainel() {
-  const cards = [
-    { rotulo: 'Leads novos', valor: '48', var: '+12%' },
-    { rotulo: 'Na discadora', valor: '9', var: 'agora' },
-    { rotulo: 'Reuniões', valor: '17', var: '+5' },
-    { rotulo: 'Pipeline', valor: 'R$ 184 mil', var: '+8%' },
-    { rotulo: 'Tempo de resposta', valor: '4,2 s', var: '-85%' },
-  ]
-  return (
-    <div className="site-mock">
-      <aside>
-        <Logo />
-        {['Funil de vendas', 'Painel', 'Oportunidades', 'Interessados', 'Tarefas', 'Empresas'].map((item, i) => (
-          <span key={item} className={i === 1 ? 'ativo' : ''}>
-            {item}
-          </span>
-        ))}
-      </aside>
-      <div className="site-mock-corpo">
-        <div className="site-mock-topo">
-          <strong>Painel</strong>
-          <span className="site-mock-pilula">+ Nova oportunidade</span>
-        </div>
-        <small className="site-mock-sub">VISÃO GERAL · OUTUBRO</small>
-        <div className="site-mock-cards">
-          {cards.map((c) => (
-            <div key={c.rotulo}>
-              <small>{c.rotulo}</small>
-              <strong>{c.valor}</strong>
-              <em>{c.var}</em>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
-}
-
 function Bento() {
   const colunas = [
     { nome: 'Novos', itens: ['Clínica Vida', 'Loja Norte'] },
@@ -622,7 +584,7 @@ function Rodape() {
 // Revela cada seção com fade-up quando ela entra na tela.
 function useRevelarAoRolar(ref) {
   useEffect(() => {
-    const alvos = ref.current.querySelectorAll('.site-secao, .site-cta, .site-mock')
+    const alvos = ref.current.querySelectorAll('.site-secao')
     const observador = new IntersectionObserver(
       (entradas) => {
         entradas.forEach((entrada) => {
@@ -662,7 +624,6 @@ export default function Site() {
       <section className="site-hero">
         <Orbita />
         <Hero />
-        <MockPainel />
       </section>
 
       <DemoIntegracao />
