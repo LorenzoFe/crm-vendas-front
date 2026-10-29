@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Alert, Button, Card, Checkbox, Col, Divider, Empty, Form, Input, Radio, Result, Row, Select, Skeleton, Tag, Typography } from 'antd'
+import { Alert, Button, Card, Checkbox, Col, Divider, Form, Input, Radio, Result, Row, Select, Typography } from 'antd'
 import { BarChartOutlined, FunnelPlotOutlined, SafetyCertificateOutlined, SendOutlined, TeamOutlined } from '@ant-design/icons'
 import { apiPublica, mensagemDeErro } from '../api/client'
 import { mascararTelefone, somenteNumeros, telefoneCompleto, vazioParaNulo } from '../utils/formatar'
@@ -15,7 +15,6 @@ const VANTAGENS = [
 export default function AreaCliente() {
   const [form] = Form.useForm()
   const [produtos, setProdutos] = useState([])
-  const [carregandoProdutos, setCarregandoProdutos] = useState(true)
   const [erroProdutos, setErroProdutos] = useState(null)
   const [enviando, setEnviando] = useState(false)
   const [erro, setErro] = useState(null)
@@ -26,15 +25,21 @@ export default function AreaCliente() {
       .get('/publico/produtos')
       .then(({ data }) => setProdutos(data))
       .catch((e) => setErroProdutos(mensagemDeErro(e)))
-      .finally(() => setCarregandoProdutos(false))
   }, [])
 
   async function enviar(valores) {
     setEnviando(true)
     setErro(null)
     try {
+      // O lead não escolhe produto: o interesse vai com o plano padrão (a API exige um produto).
+      const padrao = produtos.find((p) => p.nome?.toLowerCase().includes('essencial')) ?? produtos[0]
+      if (!padrao) {
+        setErro(erroProdutos ?? 'Não foi possível enviar agora. Tente novamente em instantes.')
+        return
+      }
       const corpo = vazioParaNulo({
         ...valores,
+        produtoIds: [padrao.id],
         telefone: somenteNumeros(valores.telefone),
         cnpj: somenteNumeros(valores.cnpj),
       })
@@ -67,7 +72,7 @@ export default function AreaCliente() {
           Venda mais com um CRM feito para a sua equipe
         </Typography.Title>
         <Typography.Paragraph className="area-cliente-hero-texto">
-          Conte para nós o que a sua empresa precisa e quais soluções chamaram sua atenção. Nossa equipe comercial entra em contato
+          Conte para nós o que a sua empresa precisa. Nossa equipe comercial entra em contato
           para apresentar a melhor opção.
         </Typography.Paragraph>
         <Button type="primary" size="large" href="#formulario-interesse">
@@ -106,36 +111,7 @@ export default function AreaCliente() {
               {erro && <Alert type="error" message={erro} showIcon closable onClose={() => setErro(null)} style={{ marginBottom: 16 }} />}
 
               <Form form={form} layout="vertical" onFinish={enviar} initialValues={{ preferenciaContato: 'EMAIL' }} scrollToFirstError>
-                <Divider orientation="left">1. Produtos de interesse</Divider>
-                {carregandoProdutos ? (
-                  <Skeleton active />
-                ) : erroProdutos ? (
-                  <Alert type="warning" showIcon message="Não foi possível carregar os produtos" description={erroProdutos} />
-                ) : produtos.length === 0 ? (
-                  <Empty description="Nenhum produto disponível no momento" />
-                ) : (
-                  <Form.Item name="produtoIds" rules={[{ required: true, message: 'Escolha pelo menos um produto' }]}>
-                    <Checkbox.Group style={{ width: '100%' }}>
-                      <Row gutter={[12, 12]} style={{ width: '100%' }}>
-                        {produtos.map((p) => (
-                          <Col xs={24} md={12} lg={8} key={p.id}>
-                            <Checkbox value={p.id} className="produto-opcao">
-                              <strong>{p.nome}</strong>
-                              {p.categoria && (
-                                <Tag color="blue" style={{ marginLeft: 8 }}>
-                                  {p.categoria}
-                                </Tag>
-                              )}
-                              {p.descricao && <span className="produto-opcao-descricao">{p.descricao}</span>}
-                            </Checkbox>
-                          </Col>
-                        ))}
-                      </Row>
-                    </Checkbox.Group>
-                  </Form.Item>
-                )}
-
-                <Divider orientation="left">2. Sobre você</Divider>
+                <Divider orientation="left">1. Sobre você</Divider>
                 <Row gutter={16}>
                   <Col xs={24} md={12}>
                     <Form.Item name="nome" label="Nome completo" rules={[{ required: true, whitespace: true, message: 'Informe seu nome' }]}>
@@ -178,7 +154,7 @@ export default function AreaCliente() {
                   </Col>
                 </Row>
 
-                <Divider orientation="left">3. Sua empresa</Divider>
+                <Divider orientation="left">2. Sua empresa</Divider>
                 <Row gutter={16}>
                   <Col xs={24} md={12}>
                     <Form.Item name="empresaNome" label="Nome / razão social" rules={[{ required: true, whitespace: true, message: 'Informe o nome da empresa' }]}>
@@ -207,7 +183,7 @@ export default function AreaCliente() {
                   </Col>
                 </Row>
 
-                <Divider orientation="left">4. Como podemos ajudar</Divider>
+                <Divider orientation="left">3. Como podemos ajudar</Divider>
                 <Form.Item name="preferenciaContato" label="Prefiro ser contatado por">
                   <Radio.Group options={opcoesDe(PREFERENCIA_CONTATO)} optionType="button" />
                 </Form.Item>
