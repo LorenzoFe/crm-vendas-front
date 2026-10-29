@@ -22,7 +22,7 @@ import {
   UserOutlined,
 } from '@ant-design/icons'
 import SiteHeroDemo from './SiteHeroDemo'
-import SiteTriptico from './SiteTriptico'
+import SitePorQue from './SitePorQue'
 import { LOGOS } from './siteLogos'
 import '../site.css'
 
@@ -193,109 +193,6 @@ function DemoIntegracao() {
         <BotaoVidro to="/area-cliente">Testar o formulário</BotaoVidro>
       </div>
       <SiteHeroDemo />
-    </section>
-  )
-}
-
-function Bento() {
-  const colunas = [
-    { nome: 'Novos', itens: ['Clínica Vida', 'Loja Norte'] },
-    { nome: 'Qualificados', itens: ['Grupo Alfa'] },
-    { nome: 'Proposta', itens: ['TechSul', 'Rede Mais'] },
-  ]
-  return (
-    <section className="site-secao" id="recursos">
-      <div className="site-titulo">
-        <h2>Por que times de inbound escolhem o Córtex</h2>
-        <p>Recursos pensados para quem precisa atender o lead enquanto ele ainda está quente.</p>
-      </div>
-      <div className="site-bento">
-        <div className="site-bento-item grande">
-          <div className="site-bento-visual gradiente">
-            <img className="site-app-icone" src="/logo-cortex.png" alt="" />
-            <div className="site-bento-rostos">
-              {['#ffd666', '#91caff', '#ffadd2', '#b7eb8f', '#d3adf7', '#87e8de'].map((cor) => (
-                <span key={cor} style={{ background: cor }}>
-                  <UserOutlined />
-                </span>
-              ))}
-            </div>
-            <span className="site-chip">
-              <ThunderboltOutlined /> Distribuição automática
-            </span>
-          </div>
-          <h3>Speed-to-lead</h3>
-          <p>Todo lead novo vai direto para a fila da discadora e cai no primeiro SDR livre.</p>
-        </div>
-
-        <div className="site-bento-item">
-          <div className="site-bento-visual">
-            <div className="site-mini-kanban">
-              {colunas.map((col) => (
-                <div key={col.nome}>
-                  <small>{col.nome}</small>
-                  {col.itens.map((item) => (
-                    <span key={item}>{item}</span>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-          <h3>Funil flexível</h3>
-          <p>Arraste oportunidades entre estágios e acompanhe o valor de cada etapa.</p>
-        </div>
-
-        <div className="site-bento-item">
-          <div className="site-bento-visual">
-            <div className="site-mini-discador">
-              {[
-                ['Ana Souza', 'Atendido', 'verde'],
-                ['Pedro Reis', 'Na fila', 'azul'],
-                ['Carla Dias', 'Caixa postal', 'laranja'],
-              ].map(([nome, status, cor]) => (
-                <div key={nome}>
-                  <PhoneOutlined />
-                  <span>{nome}</span>
-                  <em className={cor}>{status}</em>
-                </div>
-              ))}
-              <span className="site-chip escuro">
-                <PhoneOutlined /> Reenviar à fila
-              </span>
-            </div>
-          </div>
-          <h3>Discadora integrada</h3>
-          <p>O status de cada ligação volta para o CRM: atendido, não atendido ou caixa postal.</p>
-        </div>
-
-        <div className="site-bento-item largo">
-          <div className="site-bento-visual">
-            <div className="site-mini-tabela">
-              <div className="cabeca">
-                <span>TAREFAS DE HOJE</span>
-                <span className="site-mock-pilula">
-                  <ClockCircleOutlined /> 3 urgentes
-                </span>
-              </div>
-              {[
-                ['Ligar para Clínica Vida', 'Alta', '09:30', 'Ana'],
-                ['Enviar proposta TechSul', 'Média', '11:00', 'Pedro'],
-                ['Follow-up Grupo Alfa', 'Alta', '14:15', 'Carla'],
-                ['Reunião Rede Mais', 'Baixa', '16:00', 'Ana'],
-              ].map(([titulo, prio, hora, resp]) => (
-                <div key={titulo} className="linha">
-                  <span>{titulo}</span>
-                  <em className={prio === 'Alta' ? 'laranja' : 'azul'}>{prio}</em>
-                  <span>{hora}</span>
-                  <span>{resp}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          <h3>Tarefas e agenda</h3>
-          <p>Cada ligação, e-mail e reunião vira tarefa com responsável, prazo e prioridade.</p>
-        </div>
-      </div>
     </section>
   )
 }
@@ -601,9 +498,7 @@ export default function Site() {
 
       <DemoIntegracao />
 
-      <SiteTriptico />
-
-      <Bento />
+      <SitePorQue />
       <ComoFunciona />
       <Casos />
       <Integracoes />
