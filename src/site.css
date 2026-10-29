@@ -2560,3 +2560,24 @@ img.site-app-icone {
     padding-bottom: 64px;
   }
 }
+
+/* Mobile: texto da seção do motion centralizado. */
+@media (max-width: 900px) {
+  .site-demo-texto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .site-demo-texto p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .site-demo-texto ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
