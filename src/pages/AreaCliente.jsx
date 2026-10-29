@@ -156,8 +156,10 @@ export default function AreaCliente() {
                     <Form.Item
                       name="telefone"
                       label="Telefone / WhatsApp"
+                      tooltip="Nossa equipe comercial liga para este número"
                       normalize={mascararTelefone}
                       rules={[
+                        { required: true, message: 'Informe um telefone para contato' },
                         {
                           validator: (_, v) =>
                             !v || telefoneCompleto(v) ? Promise.resolve() : Promise.reject(new Error('Informe DDD + número completo')),

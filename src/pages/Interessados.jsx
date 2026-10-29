@@ -2,16 +2,29 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import dayjs from 'dayjs'
 import { App, Button, Descriptions, Drawer, Popconfirm, Segmented, Space, Table, Tag, Tooltip, Typography } from 'antd'
-import { CheckCircleOutlined, CloseCircleOutlined, EyeOutlined, LinkOutlined } from '@ant-design/icons'
+import { CheckCircleOutlined, CloseCircleOutlined, EyeOutlined, LinkOutlined, PhoneOutlined } from '@ant-design/icons'
 import Cabecalho from '../components/Cabecalho'
 import { api, mensagemDeErro } from '../api/client'
 import { useAuth } from '../auth/AuthContext'
 import { useListaPaginada } from '../hooks/useListaPaginada'
 import { formatarCnpj, formatarTelefone } from '../utils/formatar'
-import { PREFERENCIA_CONTATO, STATUS_INTERESSE } from '../utils/rotulos'
+import { DISCADOR_PODE_REENVIAR, PREFERENCIA_CONTATO, STATUS_DISCADOR, STATUS_INTERESSE } from '../utils/rotulos'
 
 function formatarDataHora(data) {
   return data ? dayjs(data).format('DD/MM/YYYY HH:mm') : '-'
+}
+
+function TagDiscador({ interesse }) {
+  const status = STATUS_DISCADOR[interesse.discadorStatus]
+  if (!status) {
+    return (
+      <Tooltip title="Recebido antes da integração com o discador">
+        <Typography.Text type="secondary">-</Typography.Text>
+      </Tooltip>
+    )
+  }
+  const tag = <Tag color={status.cor}>{status.texto}</Tag>
+  return interesse.discadorErro ? <Tooltip title={interesse.discadorErro}>{tag}</Tooltip> : tag
 }
 
 export default function Interessados() {
@@ -56,6 +69,33 @@ export default function Interessados() {
     } finally {
       setProcessando(null)
     }
+  }
+
+  async function reenviarDiscador(interesse) {
+    setProcessando(interesse.id)
+    try {
+      const { data } = await api.put(`/interesses/${interesse.id}/reenviar-discador`)
+      if (data.discadorStatus === 'NA_FILA') {
+        message.success('Enviado para a fila do discador')
+      } else {
+        message.warning(`O discador recusou o envio: ${data.discadorErro || 'tente novamente mais tarde'}`)
+      }
+      setDetalhe(data)
+      recarregar()
+    } catch (e) {
+      message.error(mensagemDeErro(e))
+    } finally {
+      setProcessando(null)
+    }
+  }
+
+  function podeReenviar(interesse) {
+    return (
+      podeDescartar &&
+      interesse.status !== 'DESCARTADO' &&
+      Boolean(interesse.telefone) &&
+      DISCADOR_PODE_REENVIAR.includes(interesse.discadorStatus)
+    )
   }
 
   function acoes(interesse, comTexto = false) {
@@ -119,6 +159,7 @@ export default function Interessados() {
       render: (produtos) => produtos.map((p) => <Tag key={p.id}>{p.nome}</Tag>),
     },
     { title: 'Status', dataIndex: 'status', width: 120, render: (s) => <Tag color={STATUS_INTERESSE[s]?.cor}>{STATUS_INTERESSE[s]?.texto}</Tag> },
+    { title: 'Discador', dataIndex: 'discadorStatus', width: 150, render: (_, i) => <TagDiscador interesse={i} /> },
     {
       key: 'acoes',
       width: 130,
@@ -154,7 +195,7 @@ export default function Interessados() {
         Pedidos enviados pela <a href="/area-cliente" target="_blank" rel="noreferrer">Área do Cliente</a>. Converta os interessados
         qualificados em oportunidades ou descarte os que não fazem sentido.
       </Typography.Paragraph>
-      <Table rowKey="id" columns={colunas} dataSource={itens} loading={carregando} pagination={paginacao} scroll={{ x: 900 }} />
+      <Table rowKey="id" columns={colunas} dataSource={itens} loading={carregando} pagination={paginacao} scroll={{ x: 1050 }} />
 
       <Drawer title={detalhe?.empresaNome} open={Boolean(detalhe)} onClose={() => setDetalhe(null)} width={520} extra={detalhe && acoes(detalhe, true)}>
         {detalhe && (
@@ -187,6 +228,39 @@ export default function Interessados() {
                 {detalhe.usuarioTratamentoNome || '-'} em {formatarDataHora(detalhe.dataTratamento)}
               </Descriptions.Item>
             )}
+          </Descriptions>
+        )}
+
+        {detalhe && (
+          <Descriptions
+            title="Discador"
+            column={1}
+            size="small"
+            bordered
+            style={{ marginTop: 24 }}
+            extra={
+              podeReenviar(detalhe) && (
+                <Popconfirm
+                  title="Enviar de novo para o discador?"
+                  description={`A equipe vai receber de novo a ligação para ${formatarTelefone(detalhe.telefone)}.`}
+                  okText="Enviar"
+                  cancelText="Cancelar"
+                  onConfirm={() => reenviarDiscador(detalhe)}
+                >
+                  <Button size="small" icon={<PhoneOutlined />} loading={processando === detalhe.id}>
+                    Reenviar à fila
+                  </Button>
+                </Popconfirm>
+              )
+            }
+          >
+            <Descriptions.Item label="Situação">
+              <TagDiscador interesse={detalhe} />
+            </Descriptions.Item>
+            <Descriptions.Item label="Enviado à fila em">{formatarDataHora(detalhe.discadorEnviadoEm)}</Descriptions.Item>
+            <Descriptions.Item label="Resultado em">{formatarDataHora(detalhe.discadorResultadoEm)}</Descriptions.Item>
+            <Descriptions.Item label="Tentativas de envio">{detalhe.discadorTentativas ?? 0}</Descriptions.Item>
+            {detalhe.discadorErro && <Descriptions.Item label="Último erro">{detalhe.discadorErro}</Descriptions.Item>}
           </Descriptions>
         )}
       </Drawer>
