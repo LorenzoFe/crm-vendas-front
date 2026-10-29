@@ -918,21 +918,6 @@
   color: var(--azul);
 }
 
-/* ---------- CTA final ---------- */
-
-.site-cta {
-  position: relative;
-  padding: 110px 24px;
-  background: linear-gradient(180deg, #fff 0%, #d6e6ff 55%, #fff 100%);
-  overflow: hidden;
-}
-
-.site-cta .site-orbita::before,
-.site-cta .site-orbita::after {
-  top: auto;
-  bottom: -500px;
-}
-
 /* ---------- Rodapé ---------- */
 
 .site-rodape {
@@ -1255,73 +1240,6 @@
   display: inline-flex;
   gap: 2px;
   color: var(--estrela);
-}
-
-/* Orb de vidro líquido (CSS puro, sem vídeo de terceiro) */
-
-.site-orb {
-  position: relative;
-  justify-self: center;
-  width: 520px;
-  height: 520px;
-  transform: scale(1.15);
-}
-
-.site-orb span {
-  position: absolute;
-  border-radius: 50%;
-}
-
-.site-orb .nucleo {
-  inset: 8%;
-  background:
-    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 22%),
-    radial-gradient(circle at 70% 75%, #00e0ff 0%, rgba(0, 224, 255, 0) 40%),
-    radial-gradient(circle at 50% 50%, #3fa2ff 0%, #0066ff 55%, #062a7a 100%);
-  box-shadow:
-    inset -30px -40px 80px rgba(3, 20, 70, 0.55),
-    inset 20px 30px 60px rgba(255, 255, 255, 0.35),
-    0 40px 120px rgba(0, 132, 255, 0.45);
-  animation: site-orb-respira 8s ease-in-out infinite;
-}
-
-.site-orb .liquido {
-  inset: 12%;
-  background: conic-gradient(from 0deg, rgba(96, 177, 255, 0) 0deg, rgba(160, 240, 255, 0.85) 80deg, rgba(0, 132, 255, 0) 160deg, rgba(120, 90, 255, 0.6) 250deg, rgba(96, 177, 255, 0) 360deg);
-  filter: blur(22px);
-  mix-blend-mode: screen;
-  animation: site-gira 14s linear infinite;
-}
-
-.site-orb .brilho {
-  left: 24%;
-  top: 16%;
-  width: 34%;
-  height: 22%;
-  background: radial-gradient(ellipse, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) 70%);
-  filter: blur(6px);
-  transform: rotate(-25deg);
-}
-
-.site-orb.pequeno {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 640px;
-  height: 640px;
-  transform: translate(-50%, -50%);
-  opacity: 0.18;
-  filter: blur(20px);
-  pointer-events: none;
-}
-
-@keyframes site-gira {
-  to { transform: rotate(360deg); }
-}
-
-@keyframes site-orb-respira {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.035); }
 }
 
 /* Vidro nos cards */
@@ -2591,3 +2509,78 @@ img.site-app-icone {
 }
 
 .site-hero .site-orbita-icone.o2 { left: 14%; top: 250px; }
+
+/* ---------- FAQ ---------- */
+
+.site-faq-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.site-faq-item {
+  border: 1px solid var(--vidro-borda);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: var(--vidro-luz), 0 6px 20px rgba(11, 27, 51, 0.04);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.site-faq-item.aberta {
+  border-color: rgba(22, 119, 255, 0.25);
+  box-shadow: var(--vidro-luz), 0 12px 30px rgba(22, 119, 255, 0.1);
+}
+
+.site-faq-item button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding: 20px 24px;
+  border: 0;
+  background: none;
+  color: var(--tinta);
+  font: inherit;
+  font-family: 'Fustat', 'Inter', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.site-faq-item button .anticon {
+  flex: 0 0 auto;
+  color: var(--azul);
+  font-size: 13px;
+  transition: transform 0.3s ease;
+}
+
+.site-faq-item.aberta button .anticon {
+  transform: rotate(180deg);
+}
+
+.site-faq-resposta {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+}
+
+.site-faq-item.aberta .site-faq-resposta {
+  grid-template-rows: 1fr;
+}
+
+.site-faq-resposta p {
+  overflow: hidden;
+  margin: 0;
+  padding: 0 24px;
+  color: var(--texto);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.site-faq-item.aberta .site-faq-resposta p {
+  padding-bottom: 22px;
+}

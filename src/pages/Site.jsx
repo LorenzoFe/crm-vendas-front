@@ -7,6 +7,7 @@ import {
   BellOutlined,
   CalendarOutlined,
   CheckCircleFilled,
+  DownOutlined,
   ClockCircleOutlined,
   DatabaseOutlined,
   FormOutlined,
@@ -32,6 +33,7 @@ const LINKS_MENU = [
   { href: '#recursos', rotulo: 'Recursos' },
   { href: '#como-funciona', rotulo: 'Como funciona' },
   { href: '#planos', rotulo: 'Planos' },
+  { href: '#faq', rotulo: 'FAQ' },
 ]
 
 const PASSOS = [
@@ -161,16 +163,6 @@ function BotaoVidro({ to, children }) {
         <ArrowRightOutlined />
       </span>
     </Link>
-  )
-}
-
-function Orb({ pequeno = false }) {
-  return (
-    <div className={`site-orb ${pequeno ? 'pequeno' : ''}`} aria-hidden="true">
-      <span className="nucleo" />
-      <span className="liquido" />
-      <span className="brilho" />
-    </div>
   )
 }
 
@@ -537,6 +529,59 @@ function Planos() {
   )
 }
 
+const PERGUNTAS = [
+  {
+    pergunta: 'O que é speed-to-lead e por que ele importa?',
+    resposta:
+      'É o tempo entre o lead pedir contato e alguém do seu time falar com ele. No inbound, cada minuto de espera derruba a chance de conversão, porque o lead esfria e procura o concorrente. O Córtex liga em segundos, enquanto ele ainda está com o seu site aberto.',
+  },
+  {
+    pergunta: 'Como o lead chega no Córtex?',
+    resposta:
+      'Pela Área do Cliente: um formulário público, com aceite LGPD, onde a pessoa deixa nome, telefone, empresa e os produtos de interesse. O interesse aparece na hora na tela de Interessados e pode virar oportunidade no funil com um clique.',
+  },
+  {
+    pergunta: 'Como funciona a ligação automática?',
+    resposta:
+      'Assim que o formulário é enviado, o número vai para a fila da discadora (hoje integrada com a Vonix). O primeiro SDR livre recebe a chamada e o resultado (atendido, não atendido, caixa postal) volta para o CRM, com data e número de tentativas.',
+  },
+  {
+    pergunta: 'Preciso ter closer no time?',
+    resposta:
+      'Não. O Córtex foi pensado para gestor comercial e pré-vendas. Se a sua operação tem closer, ele entra como mais um perfil e toca a negociação e a proposta dentro do mesmo funil.',
+  },
+  {
+    pergunta: 'Quem pode ver e mexer em cada coisa?',
+    resposta:
+      'Cada usuário tem um perfil (administrador, gerente ou vendedor) e cada perfil libera só as telas e ações certas. O acesso é por login com token, e o gestor controla quem entra e quem é desativado.',
+  },
+]
+
+function Faq() {
+  const [aberta, setAberta] = useState(0)
+  return (
+    <section className="site-secao site-faq" id="faq">
+      <div className="site-titulo">
+        <h2>Perguntas frequentes</h2>
+        <p>O que todo gestor pergunta antes de colocar o Córtex na operação.</p>
+      </div>
+      <div className="site-faq-lista">
+        {PERGUNTAS.map((item, i) => (
+          <div key={item.pergunta} className={`site-faq-item ${aberta === i ? 'aberta' : ''}`}>
+            <button onClick={() => setAberta(aberta === i ? -1 : i)} aria-expanded={aberta === i}>
+              {item.pergunta}
+              <DownOutlined />
+            </button>
+            <div className="site-faq-resposta">
+              <p>{item.resposta}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 function Rodape() {
   const colunas = [
     { titulo: 'Produto', links: ['Recursos', 'Discadora', 'Painel', 'Planos'] },
@@ -630,11 +675,7 @@ export default function Site() {
       <Integracoes />
       <Planos />
 
-      <section className="site-cta">
-        <Orbita />
-        <Orb pequeno />
-        <Hero id="comecar" />
-      </section>
+      <Faq />
 
       <Rodape />
     </div>
