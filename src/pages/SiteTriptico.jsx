@@ -328,8 +328,8 @@ export default function SiteTriptico() {
             <div className="tri-metrica">
               <div className="rotulo">Tempo de resposta</div>
               <div className="linha">
-                <strong>42 s</strong>
-                <span>↓ 30% mais rápido</span>
+                <strong>4,2 s</strong>
+                <span>↓ 85% mais rápido</span>
               </div>
             </div>
             <canvas

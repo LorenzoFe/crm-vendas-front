@@ -100,7 +100,7 @@ const PLANOS = [
 function Logo({ claro = false }) {
   return (
     <span className={`site-logo ${claro ? 'claro' : ''}`}>
-      <span className="site-logo-icone">C</span>
+      <img className="site-logo-icone" src="/logo-cortex.png" alt="" />
       córtex
     </span>
   )
@@ -193,9 +193,9 @@ function Hero({ id }) {
         </div>
       </div>
       <h1>
-        Lead entrou,
+        Reduza o <span className="sem-quebra">speed-to-lead</span>
         <br />
-        ligação saiu.
+        para menos de 5s
       </h1>
       <p>
         O CRM de inbound feito para pré-vendas. O lead preenche o formulário e a discadora já liga,
@@ -251,7 +251,7 @@ function MockPainel() {
     { rotulo: 'Na discadora', valor: '9', var: 'agora' },
     { rotulo: 'Reuniões', valor: '17', var: '+5' },
     { rotulo: 'Pipeline', valor: 'R$ 184 mil', var: '+8%' },
-    { rotulo: 'Tempo de resposta', valor: '42 s', var: '-30%' },
+    { rotulo: 'Tempo de resposta', valor: '4,2 s', var: '-85%' },
   ]
   return (
     <div className="site-mock">
@@ -298,7 +298,7 @@ function Bento() {
       <div className="site-bento">
         <div className="site-bento-item grande">
           <div className="site-bento-visual gradiente">
-            <span className="site-app-icone">C</span>
+            <img className="site-app-icone" src="/logo-cortex.png" alt="" />
             <div className="site-bento-rostos">
               {['#ffd666', '#91caff', '#ffadd2', '#b7eb8f', '#d3adf7', '#87e8de'].map((cor) => (
                 <span key={cor} style={{ background: cor }}>
@@ -524,7 +524,7 @@ function Integracoes() {
         <span className="anel r1" />
         <span className="anel r2" />
         <span className="anel r3" />
-        <span className="site-app-icone grande">C</span>
+        <img className="site-app-icone grande" src="/logo-cortex.png" alt="" />
         {MARCAS_ORBITA.slice(0, 6).map((logo, i) => (
           <span key={logo.id} className={`site-integra-icone i${i + 1}`} title={logo.nome}>
             <LogoMarca logo={logo} />
@@ -588,7 +588,7 @@ function Rodape() {
   return (
     <footer className="site-rodape">
       <div className="site-rodape-topo">
-        <span className="site-app-icone">C</span>
+        <img className="site-app-icone" src="/logo-cortex.png" alt="" />
         <span className="site-wordmark">córtex</span>
       </div>
       <div className="site-rodape-links">

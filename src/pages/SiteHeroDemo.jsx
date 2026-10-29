@@ -51,7 +51,7 @@ export default function SiteHeroDemo() {
   const depois = (etapa) => t >= ETAPAS[etapa]
   const saindo = depois('saida')
   const segundosResposta = depois('chamada')
-    ? Math.min(8, Math.floor((Math.min(t, ETAPAS.atendido) - ETAPAS.enviado) / 450) + 1)
+    ? Math.min(4, Math.floor((Math.min(t, ETAPAS.atendido) - ETAPAS.enviado) / 950) + 1)
     : 0
   const campoAtivo = CAMPOS.find((c) => t >= c.inicio && t < c.inicio + c.duracao + 150)
 

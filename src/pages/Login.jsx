@@ -32,8 +32,9 @@ export default function Login() {
   return (
     <div className="login-fundo">
       <Card className="login-card">
+        <img src="/logo-cortex.png" alt="" className="login-logo" />
         <Typography.Title level={3} style={{ textAlign: 'center', marginBottom: 4 }}>
-          CRM Vendas
+          Córtex
         </Typography.Title>
         <Typography.Paragraph type="secondary" style={{ textAlign: 'center' }}>
           Entre com seu e-mail e senha

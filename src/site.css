@@ -2652,3 +2652,25 @@
     font-size: 30px;
   }
 }
+
+/* Logo real no lugar do "C" provisório: a imagem já tem o quadrado azul. */
+img.site-logo-icone,
+img.site-app-icone {
+  background: none;
+  object-fit: contain;
+}
+
+.site .sem-quebra {
+  white-space: nowrap;
+}
+
+.site-hero-conteudo {
+  max-width: 980px;
+}
+
+.site-hero-conteudo p {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.site-hero .site-orbita-icone.o2 { left: 14%; top: 250px; }
