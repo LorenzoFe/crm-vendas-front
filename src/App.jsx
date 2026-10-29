@@ -13,12 +13,14 @@ import Tarefas from './pages/Tarefas'
 import Usuarios from './pages/Usuarios'
 import AreaCliente from './pages/AreaCliente'
 import Interessados from './pages/Interessados'
+import Site from './pages/Site'
 
 export default function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/area-cliente" element={<AreaCliente />} />
+      <Route path="/site" element={<Site />} />
       <Route element={<RotaProtegida />}>
         <Route element={<AppLayout />}>
           <Route path="/" element={<Kanban />} />

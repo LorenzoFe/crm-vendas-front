@@ -1,0 +1,590 @@
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import {
+  ApiOutlined,
+  ArrowRightOutlined,
+  BarChartOutlined,
+  BellOutlined,
+  CalendarOutlined,
+  CheckCircleFilled,
+  ClockCircleOutlined,
+  DatabaseOutlined,
+  FormOutlined,
+  GithubOutlined,
+  InstagramOutlined,
+  LinkedinOutlined,
+  MailOutlined,
+  PhoneOutlined,
+  RobotOutlined,
+  TeamOutlined,
+  ThunderboltOutlined,
+  UserOutlined,
+} from '@ant-design/icons'
+import '../site.css'
+
+// Landing page pública do Córtex. Estrutura baseada na referência aprovada pelo Moises;
+// textos são o primeiro rascunho e ainda vão ser refinados.
+
+const LINKS_MENU = [
+  { href: '#recursos', rotulo: 'Recursos' },
+  { href: '#como-funciona', rotulo: 'Como funciona' },
+  { href: '#planos', rotulo: 'Planos' },
+  { href: '#depoimentos', rotulo: 'Depoimentos' },
+]
+
+const ICONES_ORBITA = [
+  { icone: <PhoneOutlined />, cor: '#1677ff', classe: 'o1' },
+  { icone: <MailOutlined />, cor: '#ff7a45', classe: 'o2' },
+  { icone: <CalendarOutlined />, cor: '#13c2c2', classe: 'o3' },
+  { icone: <BarChartOutlined />, cor: '#722ed1', classe: 'o4' },
+  { icone: <FormOutlined />, cor: '#52c41a', classe: 'o5' },
+  { icone: <RobotOutlined />, cor: '#eb2f96', classe: 'o6' },
+]
+
+const STACK = ['React', 'Spring Boot', 'PostgreSQL', 'Docker', 'Render', 'Vonix', 'Ant Design', 'JWT']
+
+const PASSOS = [
+  {
+    aba: 'Lead chega',
+    titulo: 'O lead entra sozinho',
+    texto: 'O formulário público cria o interessado na hora, com aceite LGPD e os produtos que ele escolheu.',
+  },
+  {
+    aba: 'Discadora liga',
+    titulo: 'A discadora liga em segundos',
+    texto: 'O número vai direto para a fila da Vonix. O primeiro SDR livre atende, sem ninguém copiar telefone.',
+  },
+  {
+    aba: 'SDR qualifica',
+    titulo: 'O SDR qualifica e agenda',
+    texto: 'Com um clique o interessado vira oportunidade no funil, com tarefas, notas e histórico no card.',
+  },
+  {
+    aba: 'Gestor acompanha',
+    titulo: 'O gestor enxerga tudo',
+    texto: 'Painel com leads por estágio, conversão, motivos de perda e o desempenho de cada vendedor.',
+  },
+]
+
+const CASOS = [
+  { icone: <ThunderboltOutlined />, titulo: 'Speed-to-lead de verdade.', texto: 'Lead novo vai para a discadora no mesmo minuto em que preenche o formulário.' },
+  { icone: <TeamOutlined />, titulo: 'Pré-vendas organizado.', texto: 'Fila de interessados com status da ligação: na fila, atendido, caixa postal ou não atendido.' },
+  { icone: <BarChartOutlined />, titulo: 'Funil sem planilha.', texto: 'Arraste a oportunidade entre estágios e veja o valor do pipeline atualizado na hora.' },
+  { icone: <FormOutlined />, titulo: 'Propostas em um clique.', texto: 'Gere a proposta a partir dos itens da oportunidade, envie e registre o aceite.' },
+]
+
+const DEPOIMENTOS = [
+  { data: '12 out 2026', texto: '“Antes a gente ligava pro lead no dia seguinte. Agora a discadora já liga enquanto ele ainda está com o site aberto.”', nome: 'Ana Ribeiro', cargo: 'Gestora comercial' },
+  { foto: true, nome: 'Rafael Costa', cargo: 'Head de pré-vendas' },
+  { data: '18 out 2026', texto: '“O funil ficou claro pro time inteiro. Cada um sabe o que precisa fazer hoje sem eu cobrar no grupo.”', nome: 'Marcos Lima', cargo: 'Coordenador de vendas' },
+  { data: '24 out 2026', texto: '“O painel de desempenho acabou com a discussão de quem vendeu mais. O número está lá.”', nome: 'Juliana Alves', cargo: 'Diretora comercial' },
+]
+
+const PLANOS = [
+  {
+    nome: 'Essencial',
+    icone: <UserOutlined />,
+    descricao: 'Para quem está organizando o primeiro funil.',
+    mensal: 49,
+    itens: ['Até 3 usuários', 'Funil Kanban', 'Empresas e contatos', 'Tarefas e notas', 'Suporte por e-mail'],
+  },
+  {
+    nome: 'Equipe',
+    icone: <TeamOutlined />,
+    descricao: 'Para times de pré-vendas que vivem de inbound.',
+    mensal: 99,
+    destaque: true,
+    itens: ['Usuários ilimitados', 'Área do Cliente (formulário)', 'Discadora integrada', 'Propostas e histórico', 'Painel de desempenho', 'Perfis e permissões'],
+  },
+  {
+    nome: 'Operação',
+    icone: <ApiOutlined />,
+    descricao: 'Para operações com vários funis e gestores.',
+    mensal: 199,
+    itens: ['Tudo do Equipe', 'Vários funis', 'Relatórios avançados', 'IA sobre a base (em breve)', 'Suporte prioritário'],
+  },
+]
+
+function Logo({ claro = false }) {
+  return (
+    <span className={`site-logo ${claro ? 'claro' : ''}`}>
+      <span className="site-logo-icone">C</span>
+      córtex
+    </span>
+  )
+}
+
+function Avatares() {
+  return (
+    <div className="site-avatares">
+      {['#1677ff', '#ff7a45', '#13c2c2', '#722ed1'].map((cor) => (
+        <span key={cor} style={{ background: cor }}>
+          <UserOutlined />
+        </span>
+      ))}
+    </div>
+  )
+}
+
+function Orbita() {
+  return (
+    <div className="site-orbita" aria-hidden="true">
+      {ICONES_ORBITA.map((item) => (
+        <span key={item.classe} className={`site-orbita-icone ${item.classe}`} style={{ color: item.cor }}>
+          {item.icone}
+        </span>
+      ))}
+    </div>
+  )
+}
+
+function Hero({ id }) {
+  return (
+    <div className="site-hero-conteudo" id={id}>
+      <div className="site-prova">
+        <Avatares />
+        <div>
+          <strong>+1.200</strong>
+          <small>leads atendidos na demo</small>
+        </div>
+      </div>
+      <h1>
+        Responda antes,
+        <br />
+        venda mais rápido
+      </h1>
+      <p>
+        O CRM de inbound feito para pré-vendas. O lead entra, a discadora liga e o funil se organiza
+        sozinho, do formulário ao fechamento.
+      </p>
+      <div className="site-botoes">
+        <Link to="/login" className="site-btn escuro">
+          Entrar no CRM
+        </Link>
+        <Link to="/area-cliente" className="site-btn claro">
+          Ver demonstração
+        </Link>
+      </div>
+    </div>
+  )
+}
+
+function MockPainel() {
+  const cards = [
+    { rotulo: 'Leads novos', valor: '48', var: '+12%' },
+    { rotulo: 'Na discadora', valor: '9', var: 'agora' },
+    { rotulo: 'Reuniões', valor: '17', var: '+5' },
+    { rotulo: 'Pipeline', valor: 'R$ 184 mil', var: '+8%' },
+    { rotulo: 'Tempo de resposta', valor: '42 s', var: '-30%' },
+  ]
+  return (
+    <div className="site-mock">
+      <aside>
+        <Logo />
+        {['Funil de vendas', 'Painel', 'Oportunidades', 'Interessados', 'Tarefas', 'Empresas'].map((item, i) => (
+          <span key={item} className={i === 1 ? 'ativo' : ''}>
+            {item}
+          </span>
+        ))}
+      </aside>
+      <div className="site-mock-corpo">
+        <div className="site-mock-topo">
+          <strong>Painel</strong>
+          <span className="site-mock-pilula">+ Nova oportunidade</span>
+        </div>
+        <small className="site-mock-sub">VISÃO GERAL · OUTUBRO</small>
+        <div className="site-mock-cards">
+          {cards.map((c) => (
+            <div key={c.rotulo}>
+              <small>{c.rotulo}</small>
+              <strong>{c.valor}</strong>
+              <em>{c.var}</em>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function Bento() {
+  const colunas = [
+    { nome: 'Novos', itens: ['Clínica Vida', 'Loja Norte'] },
+    { nome: 'Qualificados', itens: ['Grupo Alfa'] },
+    { nome: 'Proposta', itens: ['TechSul', 'Rede Mais'] },
+  ]
+  return (
+    <section className="site-secao" id="recursos">
+      <div className="site-titulo">
+        <h2>Por que times de inbound escolhem o Córtex</h2>
+        <p>Recursos pensados para quem precisa atender o lead enquanto ele ainda está quente.</p>
+      </div>
+      <div className="site-bento">
+        <div className="site-bento-item grande">
+          <div className="site-bento-visual gradiente">
+            <span className="site-app-icone">C</span>
+            <div className="site-bento-rostos">
+              {['#ffd666', '#91caff', '#ffadd2', '#b7eb8f', '#d3adf7', '#87e8de'].map((cor) => (
+                <span key={cor} style={{ background: cor }}>
+                  <UserOutlined />
+                </span>
+              ))}
+            </div>
+            <span className="site-chip">
+              <ThunderboltOutlined /> Distribuição automática
+            </span>
+          </div>
+          <h3>Speed-to-lead</h3>
+          <p>Todo lead novo vai direto para a fila da discadora e cai no primeiro SDR livre.</p>
+        </div>
+
+        <div className="site-bento-item">
+          <div className="site-bento-visual">
+            <div className="site-mini-kanban">
+              {colunas.map((col) => (
+                <div key={col.nome}>
+                  <small>{col.nome}</small>
+                  {col.itens.map((item) => (
+                    <span key={item}>{item}</span>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+          <h3>Funil flexível</h3>
+          <p>Arraste oportunidades entre estágios e acompanhe o valor de cada etapa.</p>
+        </div>
+
+        <div className="site-bento-item">
+          <div className="site-bento-visual">
+            <div className="site-mini-discador">
+              {[
+                ['Ana Souza', 'Atendido', 'verde'],
+                ['Pedro Reis', 'Na fila', 'azul'],
+                ['Carla Dias', 'Caixa postal', 'laranja'],
+              ].map(([nome, status, cor]) => (
+                <div key={nome}>
+                  <PhoneOutlined />
+                  <span>{nome}</span>
+                  <em className={cor}>{status}</em>
+                </div>
+              ))}
+              <span className="site-chip escuro">
+                <PhoneOutlined /> Reenviar à fila
+              </span>
+            </div>
+          </div>
+          <h3>Discadora integrada</h3>
+          <p>O status de cada ligação volta para o CRM: atendido, não atendido ou caixa postal.</p>
+        </div>
+
+        <div className="site-bento-item largo">
+          <div className="site-bento-visual">
+            <div className="site-mini-tabela">
+              <div className="cabeca">
+                <span>TAREFAS DE HOJE</span>
+                <span className="site-mock-pilula">
+                  <ClockCircleOutlined /> 3 urgentes
+                </span>
+              </div>
+              {[
+                ['Ligar para Clínica Vida', 'Alta', '09:30', 'Ana'],
+                ['Enviar proposta TechSul', 'Média', '11:00', 'Pedro'],
+                ['Follow-up Grupo Alfa', 'Alta', '14:15', 'Carla'],
+                ['Reunião Rede Mais', 'Baixa', '16:00', 'Ana'],
+              ].map(([titulo, prio, hora, resp]) => (
+                <div key={titulo} className="linha">
+                  <span>{titulo}</span>
+                  <em className={prio === 'Alta' ? 'laranja' : 'azul'}>{prio}</em>
+                  <span>{hora}</span>
+                  <span>{resp}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <h3>Tarefas e agenda</h3>
+          <p>Cada ligação, e-mail e reunião vira tarefa com responsável, prazo e prioridade.</p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function ComoFunciona() {
+  const [ativo, setAtivo] = useState(0)
+  const passo = PASSOS[ativo]
+  return (
+    <section className="site-secao" id="como-funciona">
+      <div className="site-titulo">
+        <h2>Do formulário ao fechamento</h2>
+        <p>Quatro passos, e o sistema faz a parte chata sozinho.</p>
+      </div>
+      <div className="site-abas">
+        {PASSOS.map((p, i) => (
+          <button key={p.aba} className={i === ativo ? 'ativa' : ''} onClick={() => setAtivo(i)}>
+            {p.aba}
+          </button>
+        ))}
+      </div>
+      <div className="site-passo">
+        <div className="site-passo-texto">
+          <small>Passo {ativo + 1}</small>
+          <h3>{passo.titulo}</h3>
+          <p>{passo.texto}</p>
+          <Link to="/login" className="site-btn escuro">
+            Começar agora
+          </Link>
+        </div>
+        <div className="site-fluxo">
+          <div className="no gatilho">
+            <small>
+              <BellOutlined /> Gatilho
+            </small>
+            <span>Novo interessado</span>
+          </div>
+          <div className="no validar">
+            <small>
+              <CheckCircleFilled /> Validar
+            </small>
+            <span>Telefone e aceite LGPD</span>
+          </div>
+          <div className="no acao a1">
+            <small>Ação</small>
+            <span>Enviar para a Vonix</span>
+          </div>
+          <div className="no acao a2">
+            <small>Ação</small>
+            <span>Criar tarefa de contato</span>
+          </div>
+          <div className="no acao a3">
+            <small>Ação</small>
+            <span>Converter em oportunidade</span>
+          </div>
+          <div className="no ia">
+            <small>
+              <DatabaseOutlined /> Registro
+            </small>
+            <span>Status da ligação no CRM</span>
+          </div>
+          <svg className="site-fluxo-linhas" viewBox="0 0 400 300" preserveAspectRatio="none">
+            <path d="M80 50 V110 M80 150 V250 M80 130 H200 M200 70 V230 M200 70 H260 M200 150 H260 M200 230 H260" />
+          </svg>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function Casos() {
+  return (
+    <section className="site-secao">
+      <div className="site-titulo esquerda">
+        <h2>
+          Veja como o Córtex
+          <br />
+          resolve o dia a dia do inbound.
+        </h2>
+      </div>
+      <div className="site-casos">
+        {CASOS.map((c) => (
+          <div key={c.titulo} className="site-caso">
+            <div className="site-caso-ilustra">{c.icone}</div>
+            <h3>{c.titulo}</h3>
+            <p>{c.texto}</p>
+            <a href="#planos">
+              Saiba mais <span><ArrowRightOutlined /></span>
+            </a>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function Depoimentos() {
+  return (
+    <section className="site-secao site-fundo" id="depoimentos">
+      <div className="site-titulo esquerda">
+        <h2>Quem usa, recomenda</h2>
+        <p>Times comerciais que trocaram a planilha pelo Córtex.</p>
+      </div>
+      <div className="site-depoimentos">
+        {DEPOIMENTOS.map((d) =>
+          d.foto ? (
+            <div key={d.nome} className="site-depoimento foto">
+              <UserOutlined />
+              <div>
+                <strong>{d.nome}</strong>
+                <small>{d.cargo}</small>
+              </div>
+            </div>
+          ) : (
+            <div key={d.nome} className="site-depoimento">
+              <small>{d.data}</small>
+              <p>{d.texto}</p>
+              <div className="autor">
+                <span>{d.nome.charAt(0)}</span>
+                <div>
+                  <strong>{d.nome}</strong>
+                  <small>{d.cargo}</small>
+                </div>
+              </div>
+            </div>
+          ),
+        )}
+      </div>
+    </section>
+  )
+}
+
+function Integracoes() {
+  return (
+    <section className="site-secao">
+      <div className="site-titulo">
+        <h2>Tudo conectado num lugar só</h2>
+        <p>Formulário, discadora, funil e painel conversando entre si, sem copiar e colar.</p>
+      </div>
+      <div className="site-integra">
+        <span className="anel r1" />
+        <span className="anel r2" />
+        <span className="anel r3" />
+        <span className="site-app-icone grande">C</span>
+        {ICONES_ORBITA.map((item, i) => (
+          <span key={item.classe} className={`site-integra-icone i${i + 1}`} style={{ color: item.cor }}>
+            {item.icone}
+          </span>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function Planos() {
+  const [anual, setAnual] = useState(false)
+  return (
+    <section className="site-secao" id="planos">
+      <div className="site-titulo">
+        <h2>Planos simples, sem surpresa</h2>
+        <p>Cada plano libera um conjunto de funcionalidades. Mude quando quiser.</p>
+      </div>
+      <div className="site-toggle">
+        <button className={!anual ? 'ativo' : ''} onClick={() => setAnual(false)}>
+          Mensal
+        </button>
+        <button className={anual ? 'ativo' : ''} onClick={() => setAnual(true)}>
+          Anual
+        </button>
+      </div>
+      <div className="site-planos">
+        {PLANOS.map((p) => (
+          <div key={p.nome} className={`site-plano ${p.destaque ? 'destaque' : ''}`}>
+            <div className="nome">
+              {p.icone} {p.nome}
+            </div>
+            <p>{p.descricao}</p>
+            <div className="preco">
+              <strong>R$ {anual ? Math.round(p.mensal * 0.8) : p.mensal}</strong>
+              <small>/usuário/mês</small>
+            </div>
+            <ul>
+              {p.itens.map((item) => (
+                <li key={item}>
+                  <CheckCircleFilled /> {item}
+                </li>
+              ))}
+            </ul>
+            <Link to="/login" className={`site-btn ${p.destaque ? 'escuro' : 'claro'} cheio`}>
+              Começar agora
+            </Link>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function Rodape() {
+  const colunas = [
+    { titulo: 'Produto', links: ['Recursos', 'Discadora', 'Painel', 'Planos'] },
+    { titulo: 'Recursos', links: ['Documentação', 'API', 'Área do Cliente', 'Suporte'] },
+    { titulo: 'Projeto', links: ['Sobre o Córtex', 'Equipe', 'GitHub', 'Contato'] },
+  ]
+  return (
+    <footer className="site-rodape">
+      <div className="site-rodape-topo">
+        <span className="site-app-icone">C</span>
+        <span className="site-wordmark">córtex</span>
+      </div>
+      <div className="site-rodape-links">
+        <div className="sobre">
+          <p>O CRM de inbound para times de pré-vendas. Responda antes, venda mais rápido.</p>
+          <div className="redes">
+            <InstagramOutlined />
+            <LinkedinOutlined />
+            <GithubOutlined />
+          </div>
+        </div>
+        {colunas.map((col) => (
+          <div key={col.titulo}>
+            <strong>{col.titulo}</strong>
+            {col.links.map((link) => (
+              <a key={link} href="#recursos">
+                {link}
+              </a>
+            ))}
+          </div>
+        ))}
+      </div>
+      <small>© 2026 Córtex · Projetos Integrados II · UNIUBE</small>
+    </footer>
+  )
+}
+
+export default function Site() {
+  return (
+    <div className="site">
+      <header className="site-menu">
+        <Logo />
+        <nav>
+          {LINKS_MENU.map((l) => (
+            <a key={l.href} href={l.href}>
+              {l.rotulo}
+            </a>
+          ))}
+        </nav>
+        <Link to="/login" className="site-btn escuro pequeno">
+          Entrar
+        </Link>
+      </header>
+
+      <section className="site-hero">
+        <Orbita />
+        <Hero />
+        <MockPainel />
+      </section>
+
+      <section className="site-stack">
+        <p>Construído com tecnologia de mercado</p>
+        <div>
+          {STACK.map((s) => (
+            <span key={s}>{s}</span>
+          ))}
+        </div>
+      </section>
+
+      <Bento />
+      <ComoFunciona />
+      <Casos />
+      <Depoimentos />
+      <Integracoes />
+      <Planos />
+
+      <section className="site-cta">
+        <Orbita />
+        <Hero id="comecar" />
+      </section>
+
+      <Rodape />
+    </div>
+  )
+}
