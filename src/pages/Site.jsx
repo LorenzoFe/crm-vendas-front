@@ -300,57 +300,64 @@ function Bento() {
   )
 }
 
+// Qual nó do diagrama acende em cada passo.
+const NOS_POR_PASSO = [['gatilho', 'validar'], ['a1'], ['a2', 'a3'], ['ia']]
+
 function ComoFunciona() {
   const [ativo, setAtivo] = useState(0)
-  const passo = PASSOS[ativo]
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
+    const id = setInterval(() => setAtivo((atual) => (atual + 1) % PASSOS.length), 3200)
+    return () => clearInterval(id)
+  }, [])
+  const acesos = NOS_POR_PASSO[ativo]
+  const no = (nome) => `no ${nome} ${acesos.includes(nome) ? 'aceso' : ''}`
+
   return (
     <section className="site-secao" id="como-funciona">
       <div className="site-titulo">
         <h2>Do formulário ao fechamento</h2>
         <p>Quatro passos, e o sistema faz a parte chata sozinho.</p>
       </div>
-      <div className="site-abas">
-        {PASSOS.map((p, i) => (
-          <button key={p.aba} className={i === ativo ? 'ativa' : ''} onClick={() => setAtivo(i)}>
-            {p.aba}
-          </button>
-        ))}
-      </div>
       <div className="site-passo">
-        <div className="site-passo-texto">
-          <small>Passo {ativo + 1}</small>
-          <h3>{passo.titulo}</h3>
-          <p>{passo.texto}</p>
-          <Link to="/login" className="site-btn escuro">
-            Começar agora
-          </Link>
-        </div>
+        <ol className="site-passos">
+          {PASSOS.map((p, i) => (
+            <li key={p.aba} className={i === ativo ? 'ativo' : ''} onMouseEnter={() => setAtivo(i)}>
+              <span className="numero">{i + 1}</span>
+              <div>
+                <small>{p.aba}</small>
+                <h3>{p.titulo}</h3>
+                <p>{p.texto}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
         <div className="site-fluxo">
-          <div className="no gatilho">
+          <div className={no('gatilho')}>
             <small>
               <BellOutlined /> Gatilho
             </small>
             <span>Novo interessado</span>
           </div>
-          <div className="no validar">
+          <div className={no('validar')}>
             <small>
               <CheckCircleFilled /> Validar
             </small>
             <span>Telefone e aceite LGPD</span>
           </div>
-          <div className="no acao a1">
+          <div className={`${no('acao')} a1 ${acesos.includes('a1') ? 'aceso' : ''}`}>
             <small>Ação</small>
             <span>Enviar para a Vonix</span>
           </div>
-          <div className="no acao a2">
+          <div className={`${no('acao')} a2 ${acesos.includes('a2') ? 'aceso' : ''}`}>
             <small>Ação</small>
             <span>Criar tarefa de contato</span>
           </div>
-          <div className="no acao a3">
+          <div className={`${no('acao')} a3 ${acesos.includes('a3') ? 'aceso' : ''}`}>
             <small>Ação</small>
             <span>Converter em oportunidade</span>
           </div>
-          <div className="no ia">
+          <div className={no('ia')}>
             <small>
               <DatabaseOutlined /> Registro
             </small>
