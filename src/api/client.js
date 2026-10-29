@@ -8,6 +8,12 @@ export const api = axios.create({
   timeout: 120000,
 })
 
+// Para páginas abertas (Área do Cliente): sem token e sem redirecionar para o login.
+export const apiPublica = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
+  timeout: 120000,
+})
+
 export function salvarSessao(token, usuario) {
   localStorage.setItem(CHAVE_TOKEN, token)
   localStorage.setItem(CHAVE_USUARIO, JSON.stringify(usuario))

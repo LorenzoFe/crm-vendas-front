@@ -32,6 +32,20 @@ export const PRIORIDADE_TAREFA = {
   BAIXA: { texto: 'Baixa', cor: 'default' },
 }
 
+export const STATUS_INTERESSE = {
+  NOVO: { texto: 'Novo', cor: 'gold' },
+  CONVERTIDO: { texto: 'Convertido', cor: 'green' },
+  DESCARTADO: { texto: 'Descartado', cor: 'default' },
+}
+
+export const PREFERENCIA_CONTATO = {
+  EMAIL: 'E-mail',
+  TELEFONE: 'Telefone',
+  WHATSAPP: 'WhatsApp',
+}
+
+export const TAMANHOS_EMPRESA = ['Startup', 'PME', 'Grande', 'Corporação']
+
 export function opcoesDe(mapa) {
   return Object.entries(mapa).map(([value, v]) => ({ value, label: typeof v === 'string' ? v : v.texto }))
 }

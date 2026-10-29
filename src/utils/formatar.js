@@ -28,6 +28,28 @@ export function formatarTelefone(telefone) {
   return telefone
 }
 
+// Máscara enquanto digita: celular (xx) x xxxx-xxxx, fixo (xx) xxxx-xxxx.
+// Celular = primeiro dígito depois do DDD é 9.
+export function mascararTelefone(valor) {
+  const n = (somenteNumeros(valor) || '').slice(0, 11)
+  if (!n) return ''
+  if (n.length <= 2) return `(${n}`
+  const ddd = `(${n.slice(0, 2)}) `
+  if (n[2] === '9') {
+    const meio = n.slice(3, 7)
+    const fim = n.slice(7, 11)
+    return `${ddd}9${meio ? ` ${meio}` : ''}${fim ? `-${fim}` : ''}`
+  }
+  const meio = n.slice(2, 6)
+  const fim = n.slice(6, 10)
+  return `${ddd}${meio}${fim ? `-${fim}` : ''}`
+}
+
+export function telefoneCompleto(valor) {
+  const n = somenteNumeros(valor) || ''
+  return n.length === (n[2] === '9' ? 11 : 10)
+}
+
 export function vazioParaNulo(objeto) {
   return Object.fromEntries(
     Object.entries(objeto).map(([chave, valor]) => [chave, typeof valor === 'string' && valor.trim() === '' ? null : valor]),

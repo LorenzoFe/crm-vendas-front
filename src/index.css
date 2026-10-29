@@ -117,3 +117,106 @@ body {
 .filtros {
   margin-bottom: 16px;
 }
+
+/* Área do Cliente (página pública) */
+.area-cliente {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.area-cliente-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: #1f3a5f;
+}
+
+.area-cliente-topo a {
+  color: #fff;
+}
+
+.area-cliente-marca {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.area-cliente-hero {
+  padding: 56px 24px 96px;
+  text-align: center;
+  background: linear-gradient(135deg, #1f3a5f 0%, #1677ff 100%);
+}
+
+.area-cliente-hero .area-cliente-hero-titulo {
+  color: #fff;
+  max-width: 760px;
+  margin: 0 auto 16px;
+}
+
+.area-cliente-hero .area-cliente-hero-texto {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 16px;
+  max-width: 640px;
+  margin: 0 auto 24px;
+}
+
+.area-cliente-conteudo {
+  width: 100%;
+  max-width: 1040px;
+  margin: -56px auto 0;
+  padding: 0 16px 48px;
+  flex: 1;
+}
+
+.area-cliente-vantagem {
+  height: 100%;
+}
+
+.area-cliente-vantagem-icone {
+  font-size: 28px;
+  color: #1677ff;
+  margin-bottom: 8px;
+}
+
+.area-cliente-formulario {
+  margin-top: 24px;
+  scroll-margin-top: 16px;
+}
+
+.produto-opcao {
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.produto-opcao:hover,
+.produto-opcao.ant-checkbox-wrapper-checked {
+  border-color: #1677ff;
+  background: #f0f5ff;
+}
+
+.produto-opcao-descricao {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #595959;
+}
+
+.campo-isca {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.area-cliente-rodape {
+  text-align: center;
+  padding: 24px;
+  color: #8c8c8c;
+}
