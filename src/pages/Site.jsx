@@ -21,6 +21,7 @@ import {
   ThunderboltOutlined,
   UserOutlined,
 } from '@ant-design/icons'
+import SiteHeroDemo from './SiteHeroDemo'
 import SiteTriptico from './SiteTriptico'
 import '../site.css'
 
@@ -42,8 +43,6 @@ const ICONES_ORBITA = [
   { icone: <FormOutlined />, cor: '#52c41a', classe: 'o5' },
   { icone: <RobotOutlined />, cor: '#eb2f96', classe: 'o6' },
 ]
-
-const STACK = ['React', 'Spring Boot', 'PostgreSQL', 'Docker', 'Render', 'Vonix', 'Ant Design', 'JWT']
 
 const PASSOS = [
   {
@@ -575,7 +574,7 @@ function Rodape() {
 // Revela cada seção com fade-up quando ela entra na tela.
 function useRevelarAoRolar(ref) {
   useEffect(() => {
-    const alvos = ref.current.querySelectorAll('.site-secao, .site-stack, .site-cta, .site-mock')
+    const alvos = ref.current.querySelectorAll('.site-secao, .site-cta, .site-mock')
     const observador = new IntersectionObserver(
       (entradas) => {
         entradas.forEach((entrada) => {
@@ -622,18 +621,9 @@ export default function Site() {
         </div>
         <div className="site-hero-grade">
           <Hero lado />
-          <Orb />
+          <SiteHeroDemo />
         </div>
         <MockPainel />
-      </section>
-
-      <section className="site-stack">
-        <p>Construído com tecnologia de mercado</p>
-        <div>
-          {STACK.map((s) => (
-            <span key={s}>{s}</span>
-          ))}
-        </div>
       </section>
 
       <SiteTriptico />
