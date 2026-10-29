@@ -2522,8 +2522,9 @@ img.site-app-icone {
   color: var(--azul);
 }
 
+/* Mesmas quebras no mobile: a fonte encolhe com a tela para "Ligue automaticamente" caber. */
 @media (max-width: 900px) {
-  .quebra-desktop {
-    display: none;
+  .site-hero-conteudo h1 {
+    font-size: clamp(24px, 7.6vw, 46px);
   }
 }
