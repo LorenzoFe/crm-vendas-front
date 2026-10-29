@@ -56,7 +56,9 @@ export default function AreaCliente() {
   return (
     <div className="area-cliente">
       <header className="area-cliente-topo">
-        <span className="area-cliente-marca">CRM Vendas</span>
+        <span className="area-cliente-marca">
+          <img src="/logo-cortex.png" alt="" /> Córtex
+        </span>
         <Link to="/login">Já é da equipe? Entrar</Link>
       </header>
 
@@ -238,7 +240,7 @@ export default function AreaCliente() {
         </Card>
       </main>
 
-      <footer className="area-cliente-rodape">CRM Vendas Receptivo</footer>
+      <footer className="area-cliente-rodape">Córtex · CRM de inbound</footer>
     </div>
   )
 }

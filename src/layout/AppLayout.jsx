@@ -34,7 +34,9 @@ export default function AppLayout() {
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider breakpoint="lg" collapsedWidth={0} theme="dark">
-        <div className="logo">CRM Vendas</div>
+        <div className="logo">
+          <img src="/logo-cortex.png" alt="" /> Córtex
+        </div>
         <Menu
           theme="dark"
           mode="inline"

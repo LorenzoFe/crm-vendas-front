@@ -26,6 +26,7 @@ A porta precisa ser a **5173**: a API só aceita chamadas (CORS) de `http://loca
 ## Telas
 | Rota | Acesso | Tela |
 |---|---|---|
+| `/site` | **pública** | Landing page do Córtex: hero, motion do speed-to-lead, recursos, passo a passo, planos com pop-up de contato (cria o interesse na API) e FAQ |
 | `/area-cliente` | **pública** | Área do Cliente: apresentação, escolha de produtos e formulário de interesse (telefone obrigatório, aceite LGPD) |
 | `/login` | pública | Login |
 | `/` | logado | Funil de vendas (Kanban) |
@@ -42,6 +43,10 @@ No detalhe aparecem as datas, as tentativas e o botão **Reenviar à fila** (só
 **Reenviar faz a Vonix ligar de verdade** para o telefone do interesse.
 
 A configuração do discador fica toda na API (veja o README do crm-vendas-receptivo).
+
+## Identidade visual
+Logo e favicon em `public/` (`logo-cortex.png`, `favicon.png`). A landing page usa `src/site.css`
+(tudo prefixado com `.site`/`.pq`/`.demo` para não afetar as telas do CRM).
 
 ## Organização
 ```
