@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   CheckCircleFilled,
   ClockCircleOutlined,
@@ -35,19 +35,30 @@ function digitado(campo, t) {
   return campo.valor.slice(0, Math.round(progresso * campo.valor.length))
 }
 
-function useRelogio() {
+// O relógio só anda enquanto o motion está na tela (e a aba visível), para não gastar CPU
+// e bateria no celular com uma animação que ninguém está vendo.
+function useRelogio(ref) {
   const reduzido = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   const [t, setT] = useState(reduzido ? ETAPAS.atendido + 600 : 0)
+  const [naTela, setNaTela] = useState(false)
   useEffect(() => {
-    if (reduzido) return undefined
-    const id = setInterval(() => setT((atual) => (atual + PASSO_MS) % DURACAO_LOOP), PASSO_MS)
+    const observador = new IntersectionObserver(([entrada]) => setNaTela(entrada.isIntersecting))
+    observador.observe(ref.current)
+    return () => observador.disconnect()
+  }, [ref])
+  useEffect(() => {
+    if (reduzido || !naTela) return undefined
+    const id = setInterval(() => {
+      if (!document.hidden) setT((atual) => (atual + PASSO_MS) % DURACAO_LOOP)
+    }, PASSO_MS)
     return () => clearInterval(id)
-  }, [reduzido])
+  }, [reduzido, naTela])
   return t
 }
 
 export default function SiteHeroDemo() {
-  const t = useRelogio()
+  const raiz = useRef(null)
+  const t = useRelogio(raiz)
   const depois = (etapa) => t >= ETAPAS[etapa]
   const saindo = depois('saida')
   const segundosResposta = depois('chamada')
@@ -56,7 +67,7 @@ export default function SiteHeroDemo() {
   const campoAtivo = CAMPOS.find((c) => t >= c.inicio && t < c.inicio + c.duracao + 150)
 
   return (
-    <div className={`demo ${saindo ? 'saindo' : ''}`} aria-hidden="true">
+    <div ref={raiz} className={`demo ${saindo ? 'saindo' : ''}`} aria-hidden="true">
       <span className="demo-brilho" />
 
       <div className={`demo-form ${depois('enviado') ? 'enviado' : ''}`}>

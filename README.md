@@ -45,7 +45,7 @@ No detalhe aparecem as datas, as tentativas e o botão **Reenviar à fila** (só
 A configuração do discador fica toda na API (veja o README do crm-vendas-receptivo).
 
 ## Identidade visual
-Logo e favicon em `public/` (`logo-cortex.png`, `favicon.png`). A landing page usa `src/site.css`
+Logo e favicon em `public/` (`logo-cortex.webp`, `favicon.png`). A landing page usa `src/site.css`
 (tudo prefixado com `.site`/`.pq`/`.demo` para não afetar as telas do CRM).
 
 ## Organização

@@ -35,7 +35,7 @@ export default function AppLayout() {
     <Layout style={{ minHeight: '100vh' }}>
       <Sider breakpoint="lg" collapsedWidth={0} theme="dark">
         <div className="logo">
-          <img src="/logo-cortex.png" alt="" /> Córtex
+          <img src="/logo-cortex.webp" alt="" /> Córtex
         </div>
         <Menu
           theme="dark"

@@ -57,7 +57,7 @@ export default function AreaCliente() {
     <div className="area-cliente">
       <header className="area-cliente-topo">
         <span className="area-cliente-marca">
-          <img src="/logo-cortex.png" alt="" /> Córtex
+          <img src="/logo-cortex.webp" alt="" /> Córtex
         </span>
         <Link to="/login">Já é da equipe? Entrar</Link>
       </header>
