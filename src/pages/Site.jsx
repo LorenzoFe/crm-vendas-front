@@ -158,9 +158,9 @@ function Hero({ id }) {
   return (
     <div className="site-hero-conteudo" id={id}>
       <h1>
-        Ligue automaticamente <br className="quebra-desktop" />
-        para seus leads em <br className="quebra-desktop" />
-        <span className="site-destaque">menos de 5s</span>
+        Ligue para seus leads
+        <br />
+        em <span className="site-destaque">menos de 5s</span>
       </h1>
       <p>
         Reduza seu tempo de contato para menos de 5s com uma plataforma que integra VoIP e seu canal

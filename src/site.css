@@ -2525,6 +2525,11 @@ img.site-app-icone {
 /* Mesmas quebras no mobile: a fonte encolhe com a tela para "Ligue automaticamente" caber. */
 @media (max-width: 900px) {
   .site-hero-conteudo h1 {
-    font-size: clamp(24px, 7.6vw, 46px);
+    font-size: clamp(26px, 9vw, 46px);
   }
 }
+
+/* Headline em duas linhas: logos de baixo sobem para não cair no fade. */
+.site-hero .site-orbita-icone.o4 { top: 360px; }
+.site-hero .site-orbita-icone.o8 { top: 380px; }
+.site-hero .site-orbita-icone.o3 { top: 300px; }
