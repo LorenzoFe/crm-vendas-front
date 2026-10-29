@@ -13,7 +13,6 @@ import {
   GithubOutlined,
   InstagramOutlined,
   LinkedinOutlined,
-  MailOutlined,
   PhoneOutlined,
   RobotOutlined,
   StarFilled,
@@ -23,6 +22,7 @@ import {
 } from '@ant-design/icons'
 import SiteHeroDemo from './SiteHeroDemo'
 import SiteTriptico from './SiteTriptico'
+import { LOGOS } from './siteLogos'
 import '../site.css'
 
 // Landing page pública do Córtex. Estrutura baseada na referência aprovada pelo Moises;
@@ -33,15 +33,6 @@ const LINKS_MENU = [
   { href: '#como-funciona', rotulo: 'Como funciona' },
   { href: '#planos', rotulo: 'Planos' },
   { href: '#depoimentos', rotulo: 'Depoimentos' },
-]
-
-const ICONES_ORBITA = [
-  { icone: <PhoneOutlined />, cor: '#1677ff', classe: 'o1' },
-  { icone: <MailOutlined />, cor: '#ff7a45', classe: 'o2' },
-  { icone: <CalendarOutlined />, cor: '#13c2c2', classe: 'o3' },
-  { icone: <BarChartOutlined />, cor: '#722ed1', classe: 'o4' },
-  { icone: <FormOutlined />, cor: '#52c41a', classe: 'o5' },
-  { icone: <RobotOutlined />, cor: '#eb2f96', classe: 'o6' },
 ]
 
 const PASSOS = [
@@ -127,12 +118,43 @@ function Avatares() {
   )
 }
 
+function LogoMarca({ logo }) {
+  if (logo.id === 'linkedin') {
+    return <span className="site-marca-in">in</span>
+  }
+  if (logo.id === 'twilio') {
+    return (
+      <svg viewBox="0 0 24 24" fill={logo.cor}>
+        <path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24Zm0 20.8a8.8 8.8 0 1 1 0-17.6 8.8 8.8 0 0 1 0 17.6Z" />
+        <circle cx="9.2" cy="9.2" r="2.3" />
+        <circle cx="14.8" cy="9.2" r="2.3" />
+        <circle cx="9.2" cy="14.8" r="2.3" />
+        <circle cx="14.8" cy="14.8" r="2.3" />
+      </svg>
+    )
+  }
+  return (
+    <svg viewBox="0 0 24 24" fill={logo.cor}>
+      <path d={logo.path} />
+    </svg>
+  )
+}
+
+const MARCAS_ORBITA = [
+  ...LOGOS.filter((l) => ['make', 'googleads', 'aircall', 'n8n'].includes(l.id)),
+  { id: 'linkedin', nome: 'LinkedIn', cor: '#0a66c2' },
+  ...LOGOS.filter((l) => ['meta', 'vonage'].includes(l.id)),
+  { id: 'twilio', nome: 'Twilio', cor: '#f22f46' },
+]
+
 function Orbita() {
   return (
     <div className="site-orbita" aria-hidden="true">
-      {ICONES_ORBITA.map((item) => (
-        <span key={item.classe} className={`site-orbita-icone ${item.classe}`} style={{ color: item.cor }}>
-          {item.icone}
+      <span className="site-arco a1" />
+      <span className="site-arco a2" />
+      {MARCAS_ORBITA.map((logo, i) => (
+        <span key={logo.id} className={`site-orbita-icone o${i + 1}`} title={logo.nome}>
+          <LogoMarca logo={logo} />
         </span>
       ))}
     </div>
@@ -160,43 +182,66 @@ function Orb({ pequeno = false }) {
   )
 }
 
-function Hero({ id, lado = false }) {
+function Hero({ id }) {
   return (
-    <div className={`site-hero-conteudo ${lado ? 'lado' : ''}`} id={id}>
-      {lado ? (
-        <div className="site-estrelas">
-          <span>
-            {[1, 2, 3, 4, 5].map((n) => (
-              <StarFilled key={n} />
-            ))}
-          </span>
-          Nota 4,9/5 de quem testou na demo
+    <div className="site-hero-conteudo" id={id}>
+      <div className="site-prova">
+        <Avatares />
+        <div>
+          <strong>+300 mil</strong>
+          <small>ligações realizadas</small>
         </div>
-      ) : (
-        <div className="site-prova">
-          <Avatares />
-          <div>
-            <strong>+1.200</strong>
-            <small>leads atendidos na demo</small>
-          </div>
-        </div>
-      )}
+      </div>
       <h1>
-        Responda antes,
+        Lead entrou,
         <br />
-        venda mais rápido
+        ligação saiu.
       </h1>
       <p>
-        O CRM de inbound feito para pré-vendas. O lead entra, a discadora liga e o funil se organiza
-        sozinho, do formulário ao fechamento.
+        O CRM de inbound feito para pré-vendas. O lead preenche o formulário e a discadora já liga,
+        enquanto ele ainda está com o seu site aberto.
       </p>
       <div className="site-botoes">
-        <BotaoVidro to="/login">Começar agora</BotaoVidro>
-        <Link to="/area-cliente" className="site-btn claro">
+        <Link to="/login" className="site-btn escuro">
+          Começar agora
+        </Link>
+        <Link to="/area-cliente" className="site-btn cinza">
           Ver demonstração
         </Link>
       </div>
     </div>
+  )
+}
+
+function DemoIntegracao() {
+  return (
+    <section className="site-secao site-demo-secao" id="como-funciona-ao-vivo">
+      <div className="site-demo-texto">
+        <small>Speed-to-lead</small>
+        <h2>
+          Do formulário à ligação
+          <br />
+          em segundos
+        </h2>
+        <p>
+          O lead preenche o formulário, o Córtex manda o número direto para a fila da discadora e o
+          primeiro SDR livre já recebe a chamada. Sem copiar telefone, sem esperar o dia seguinte.
+        </p>
+        <ul>
+          <li>
+            <CheckCircleFilled /> Interesse registrado com aceite LGPD
+          </li>
+          <li>
+            <CheckCircleFilled /> Número na fila da Vonix na hora
+          </li>
+          <li>
+            <CheckCircleFilled /> Status da ligação de volta no CRM
+          </li>
+        </ul>
+        <BotaoVidro to="/area-cliente">Testar o formulário</BotaoVidro>
+      </div>
+      <SiteHeroDemo />
+    </section>
   )
 }
 
@@ -480,9 +525,9 @@ function Integracoes() {
         <span className="anel r2" />
         <span className="anel r3" />
         <span className="site-app-icone grande">C</span>
-        {ICONES_ORBITA.map((item, i) => (
-          <span key={item.classe} className={`site-integra-icone i${i + 1}`} style={{ color: item.cor }}>
-            {item.icone}
+        {MARCAS_ORBITA.slice(0, 6).map((logo, i) => (
+          <span key={logo.id} className={`site-integra-icone i${i + 1}`} title={logo.nome}>
+            <LogoMarca logo={logo} />
           </span>
         ))}
       </div>
@@ -612,16 +657,12 @@ export default function Site() {
       </header>
 
       <section className="site-hero">
-        <div className="site-brilho" aria-hidden="true">
-          <span />
-          <span />
-        </div>
-        <div className="site-hero-grade">
-          <Hero lado />
-          <SiteHeroDemo />
-        </div>
+        <Orbita />
+        <Hero />
         <MockPainel />
       </section>
+
+      <DemoIntegracao />
 
       <SiteTriptico />
 

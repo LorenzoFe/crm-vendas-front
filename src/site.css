@@ -2466,3 +2466,189 @@
 .site-btn {
   white-space: nowrap;
 }
+
+/* ---------- Hero centralizado (referência Veris) + logos das integrações ---------- */
+
+.site-hero {
+  padding-top: 150px;
+  background: radial-gradient(ellipse at 50% 0%, #f2f7ff 0%, #fff 65%);
+}
+
+.site-hero::after {
+  display: none;
+}
+
+.site-hero-conteudo h1 {
+  font-size: 72px;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+}
+
+.site-hero-conteudo p {
+  max-width: 500px;
+}
+
+.site-btn.cinza {
+  border-radius: 10px;
+  background: #eef0f3;
+  color: var(--tinta);
+}
+
+.site-btn.cinza:hover {
+  background: #e4e7ec;
+}
+
+.site-orbita::before {
+  top: -60px;
+  width: 960px;
+  height: 960px;
+}
+
+.site-orbita::after {
+  top: -200px;
+  width: 1360px;
+  height: 1360px;
+  border-style: dashed;
+}
+
+.site-arco {
+  position: absolute;
+  left: 50%;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translateX(-50%);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 1.5px), #000 calc(100% - 1px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 1.5px), #000 calc(100% - 1px));
+  animation: site-arco-gira 24s linear infinite;
+}
+
+.site-arco.a1 {
+  top: -60px;
+  width: 960px;
+  height: 960px;
+  background: conic-gradient(from 300deg, transparent 0deg, #4096ff 30deg, transparent 70deg, transparent 360deg);
+}
+
+.site-arco.a2 {
+  top: -200px;
+  width: 1360px;
+  height: 1360px;
+  background: conic-gradient(from 40deg, transparent 0deg, #69b1ff 25deg, transparent 60deg, transparent 360deg);
+  animation-duration: 36s;
+  animation-direction: reverse;
+}
+
+@keyframes site-arco-gira {
+  to { transform: translateX(-50%) rotate(360deg); }
+}
+
+.site-orbita-icone,
+.site-integra-icone {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(11, 27, 51, 0.06), 0 10px 24px rgba(11, 27, 51, 0.08);
+}
+
+.site-orbita-icone svg,
+.site-integra-icone svg {
+  width: 24px;
+  height: 24px;
+}
+
+.site-marca-in {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+  background: #0a66c2;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.site-orbita-icone.o1 { left: 4%; top: 170px; }
+.site-orbita-icone.o2 { left: 19%; top: 210px; animation-delay: -1s; }
+.site-orbita-icone.o3 { left: 9%; top: 330px; animation-delay: -2s; }
+.site-orbita-icone.o4 { left: 2%; top: 470px; animation-delay: -3s; }
+.site-orbita-icone.o5 { right: 22%; top: 150px; left: auto; animation-delay: -4s; }
+.site-orbita-icone.o6 { right: 8%; top: 230px; left: auto; animation-delay: -5s; }
+.site-orbita-icone.o7 { right: 4%; top: 360px; left: auto; animation-delay: -1.5s; }
+.site-orbita-icone.o8 { right: 13%; top: 480px; left: auto; animation-delay: -2.5s; }
+
+.site-cta .site-orbita-icone.o1 { top: 60px; }
+.site-cta .site-orbita-icone.o5 { top: 50px; }
+
+/* Seção do motion (formulário → discadora → ligação) */
+
+.site-demo-secao {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: 40px;
+}
+
+.site-demo-texto small {
+  color: var(--azul);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.site-demo-texto h2 {
+  margin: 10px 0 16px;
+  font-size: 42px;
+  line-height: 1.08;
+}
+
+.site-demo-texto p {
+  max-width: 440px;
+  color: var(--texto);
+  line-height: 1.6;
+}
+
+.site-demo-texto ul {
+  margin: 22px 0 30px;
+  padding: 0;
+  list-style: none;
+}
+
+.site-demo-texto li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  font-size: 15px;
+}
+
+.site-demo-texto li .anticon {
+  color: var(--azul);
+}
+
+@media (max-width: 900px) {
+  .site-hero {
+    padding-top: 110px;
+  }
+
+  .site-hero-conteudo h1 {
+    font-size: 46px;
+  }
+
+  .site-orbita::before,
+  .site-orbita::after,
+  .site-arco {
+    display: none;
+  }
+
+  .site-demo-secao {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .site-demo-texto h2 {
+    font-size: 30px;
+  }
+}
