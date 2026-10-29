@@ -14,6 +14,7 @@ import {
   UserOutlined,
 } from '@ant-design/icons'
 import SiteHeroDemo from './SiteHeroDemo'
+import SiteFormPlano from './SiteFormPlano'
 import SitePorQue from './SitePorQue'
 import { LOGOS } from './siteLogos'
 import '../site.css'
@@ -68,7 +69,7 @@ const PLANOS = [
       'Painel de desempenho',
       'Perfis e permissões',
     ],
-    botao: { rotulo: 'Começar agora', para: '/login' },
+    botao: 'Começar agora',
   },
   {
     nome: 'Business',
@@ -83,7 +84,7 @@ const PLANOS = [
       'Integração com outras discadoras e ferramentas',
       'Suporte prioritário',
     ],
-    botao: { rotulo: 'Falar com a gente', para: '/area-cliente' },
+    botao: 'Falar com a gente',
   },
 ]
 
@@ -139,14 +140,14 @@ function Orbita() {
   )
 }
 
-function BotaoVidro({ to, children }) {
+function BotaoVidro({ href, children }) {
   return (
-    <Link to={to} className="site-btn vidro">
+    <a href={href} className="site-btn vidro">
       {children}
       <span className="site-btn-seta">
         <ArrowRightOutlined />
       </span>
-    </Link>
+    </a>
   )
 }
 
@@ -163,9 +164,9 @@ function Hero({ id }) {
         inbound em um único fluxo de vendas.
       </p>
       <div className="site-botoes">
-        <Link to="/login" className="site-btn escuro">
+        <a href="#planos" className="site-btn escuro">
           Começar agora
-        </Link>
+        </a>
         <Link to="/area-cliente" className="site-btn cinza">
           Ver demonstração
         </Link>
@@ -186,7 +187,7 @@ function DemoIntegracao() {
           O lead preenche o formulário, o Córtex manda o número direto para a fila da discadora e o
           primeiro SDR livre já recebe a chamada. Sem copiar telefone, sem esperar o dia seguinte.
         </p>
-        <BotaoVidro to="/area-cliente">Testar o formulário</BotaoVidro>
+        <BotaoVidro href="#planos">Quero ligar em menos de 5s</BotaoVidro>
       </div>
       <SiteHeroDemo />
     </section>
@@ -266,6 +267,7 @@ function ComoFunciona() {
 }
 
 function Planos() {
+  const [planoEscolhido, setPlanoEscolhido] = useState(null)
   return (
     <section className="site-secao" id="planos">
       <div className="site-titulo">
@@ -291,12 +293,21 @@ function Planos() {
                 </li>
               ))}
             </ul>
-            <Link to={p.botao.para} className={`site-btn ${p.destaque ? 'escuro' : 'claro'} cheio`}>
-              {p.botao.rotulo}
-            </Link>
+            <button
+              type="button"
+              className={`site-btn ${p.destaque ? 'escuro' : 'claro'} cheio`}
+              onClick={() => setPlanoEscolhido(p.nome)}
+            >
+              {p.botao}
+            </button>
           </div>
         ))}
       </div>
+      <SiteFormPlano
+        plano={planoEscolhido ?? ''}
+        aberto={planoEscolhido !== null}
+        aoFechar={() => setPlanoEscolhido(null)}
+      />
     </section>
   )
 }

@@ -2343,3 +2343,46 @@ img.site-app-icone {
   font-weight: 700;
   box-shadow: 0 6px 14px rgba(22, 119, 255, 0.3);
 }
+
+/* Botões de plano são <button>: zera o estilo nativo. */
+button.site-btn {
+  border: 0;
+  font: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+button.site-btn.claro {
+  border: 1px solid var(--borda);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Pop-up do plano */
+.site-modal-topo {
+  margin-bottom: 18px;
+}
+
+.site-modal-plano {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #e6f4ff;
+  color: #1677ff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.site-modal-topo h3 {
+  margin: 10px 0 4px;
+  font-family: 'Fustat', 'Inter', sans-serif;
+  font-size: 22px;
+}
+
+.site-modal-topo p {
+  margin: 0;
+  color: #5b6b82;
+}
