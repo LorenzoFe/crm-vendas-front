@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   ApiOutlined,
@@ -14,8 +14,10 @@ import {
   UserOutlined,
 } from '@ant-design/icons'
 import SiteHeroDemo from './SiteHeroDemo'
-import SiteFormPlano from './SiteFormPlano'
 import SitePorQue from './SitePorQue'
+
+// O pop-up usa Form/Modal/Select do antd: só baixa quando alguém clica num plano.
+const SiteFormPlano = lazy(() => import('./SiteFormPlano'))
 import { LOGOS } from './siteLogos'
 import '../site.css'
 
@@ -91,7 +93,7 @@ const PLANOS = [
 function Logo({ claro = false }) {
   return (
     <span className={`site-logo ${claro ? 'claro' : ''}`}>
-      <img className="site-logo-icone" src="/logo-cortex.png" alt="" />
+      <img className="site-logo-icone" src="/logo-cortex.webp" alt="" />
       córtex
     </span>
   )
@@ -199,16 +201,23 @@ const NOS_POR_PASSO = [['gatilho', 'validar'], ['a1'], ['a2', 'a3'], ['ia']]
 
 function ComoFunciona() {
   const [ativo, setAtivo] = useState(0)
+  const secao = useRef(null)
+  const [naTela, setNaTela] = useState(false)
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
+    const observador = new IntersectionObserver(([entrada]) => setNaTela(entrada.isIntersecting))
+    observador.observe(secao.current)
+    return () => observador.disconnect()
+  }, [])
+  useEffect(() => {
+    if (!naTela || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
     const id = setInterval(() => setAtivo((atual) => (atual + 1) % PASSOS.length), 3200)
     return () => clearInterval(id)
-  }, [])
+  }, [naTela])
   const acesos = NOS_POR_PASSO[ativo]
   const no = (nome) => `no ${nome} ${acesos.includes(nome) ? 'aceso' : ''}`
 
   return (
-    <section className="site-secao" id="como-funciona">
+    <section className="site-secao" id="como-funciona" ref={secao}>
       <div className="site-titulo">
         <h2>Do formulário ao fechamento</h2>
         <p>Quatro passos, e o sistema faz a parte chata sozinho.</p>
@@ -268,6 +277,8 @@ function ComoFunciona() {
 
 function Planos() {
   const [planoEscolhido, setPlanoEscolhido] = useState(null)
+  const formUsado = useRef(false)
+  if (planoEscolhido !== null) formUsado.current = true
   return (
     <section className="site-secao" id="planos">
       <div className="site-titulo">
@@ -303,11 +314,15 @@ function Planos() {
           </div>
         ))}
       </div>
-      <SiteFormPlano
-        plano={planoEscolhido ?? ''}
-        aberto={planoEscolhido !== null}
-        aoFechar={() => setPlanoEscolhido(null)}
-      />
+      {formUsado.current && (
+        <Suspense fallback={null}>
+          <SiteFormPlano
+            plano={planoEscolhido ?? ''}
+            aberto={planoEscolhido !== null}
+            aoFechar={() => setPlanoEscolhido(null)}
+          />
+        </Suspense>
+      )}
     </section>
   )
 }
@@ -374,7 +389,7 @@ function Rodape() {
   return (
     <footer className="site-rodape">
       <div className="site-rodape-topo">
-        <img className="site-app-icone" src="/logo-cortex.png" alt="" />
+        <img className="site-app-icone" src="/logo-cortex.webp" alt="" />
         <span className="site-wordmark">córtex</span>
       </div>
       <div className="site-rodape-links">

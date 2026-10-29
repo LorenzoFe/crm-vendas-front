@@ -32,7 +32,7 @@ export default function Login() {
   return (
     <div className="login-fundo">
       <Card className="login-card">
-        <img src="/logo-cortex.png" alt="" className="login-logo" />
+        <img src="/logo-cortex.webp" alt="" className="login-logo" />
         <Typography.Title level={3} style={{ textAlign: 'center', marginBottom: 4 }}>
           Córtex
         </Typography.Title>

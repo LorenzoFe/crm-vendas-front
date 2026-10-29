@@ -98,41 +98,8 @@
   border: 1px solid var(--borda);
 }
 
-.site-btn.pequeno {
-  padding: 9px 16px;
-  font-size: 13px;
-}
-
 .site-btn.cheio {
   width: 100%;
-}
-
-.site-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 7px 14px;
-  border-radius: 999px;
-  background: #fff;
-  font-size: 12px;
-  font-weight: 600;
-  box-shadow: 0 4px 14px rgba(11, 27, 51, 0.12);
-}
-
-.site-chip.escuro {
-  background: var(--tinta);
-  color: #fff;
-}
-
-.site-mock-pilula {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: var(--tinta);
-  color: #fff;
-  font-size: 11px;
 }
 
 .site em {
@@ -143,25 +110,10 @@
   border-radius: 999px;
 }
 
-.site em.verde { background: #f6ffed; color: #389e0d; }
-.site em.azul { background: #e6f4ff; color: var(--azul); }
-.site em.laranja { background: #fff2e8; color: #d4380d; }
-
 .site-secao {
   max-width: 1120px;
   margin: 0 auto;
   padding: 96px 24px;
-}
-
-.site-fundo {
-  max-width: none;
-  background: var(--fundo-suave);
-}
-
-.site-fundo > * {
-  max-width: 1072px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .site-titulo {
@@ -224,45 +176,6 @@
   max-width: 680px;
   margin: 0 auto;
   text-align: center;
-}
-
-.site-prova {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  text-align: left;
-  margin-bottom: 20px;
-}
-
-.site-prova strong {
-  display: block;
-  font-size: 15px;
-}
-
-.site-prova small {
-  color: var(--texto);
-  font-size: 11px;
-}
-
-.site-avatares {
-  display: flex;
-}
-
-.site-avatares span {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  margin-left: -8px;
-  border: 2px solid #fff;
-  border-radius: 50%;
-  color: #fff;
-  font-size: 13px;
-}
-
-.site-avatares span:first-child {
-  margin-left: 0;
 }
 
 .site-hero-conteudo h1 {
@@ -351,29 +264,6 @@
   background: #fafcff;
 }
 
-.site-passo-texto {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.site-passo-texto small {
-  color: var(--azul);
-  font-weight: 600;
-}
-
-.site-passo-texto h3 {
-  margin-top: 8px;
-  font-size: 28px;
-}
-
-.site-passo-texto p {
-  margin: auto 0 18px;
-  max-width: 300px;
-  color: var(--texto);
-  line-height: 1.6;
-}
-
 .site-fluxo {
   position: relative;
   border-radius: 16px;
@@ -429,31 +319,6 @@
 .site-fluxo .a3 { top: 70%; }
 
 /* ---------- Planos ---------- */
-
-.site-toggle {
-  display: flex;
-  width: max-content;
-  margin: -24px auto 40px;
-  padding: 4px;
-  border-radius: 10px;
-  background: var(--fundo-suave);
-}
-
-.site-toggle button {
-  padding: 7px 18px;
-  border: 0;
-  border-radius: 8px;
-  background: none;
-  color: var(--texto);
-  font: inherit;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.site-toggle button.ativo {
-  background: var(--tinta);
-  color: #fff;
-}
 
 .site-planos {
   display: grid;
@@ -579,8 +444,7 @@
 
 @media (max-width: 900px) {
   .site-menu nav,
-  .site-orbita-icone,
-  .site-mock aside {
+  .site-orbita-icone {
     display: none;
   }
 
@@ -596,45 +460,14 @@
     padding: 64px 16px;
   }
 
-  .site-mock {
-    grid-template-columns: 1fr;
-  }
-
-  .site-mock-cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .site-bento,
   .site-passo,
   .site-planos,
   .site-rodape-links {
     grid-template-columns: 1fr;
   }
 
-  .site-bento-item.grande,
-  .site-bento-item.largo {
-    grid-row: auto;
-    grid-column: auto;
-  }
-
-  .site-bento-item.grande .site-bento-visual {
-    min-height: 360px;
-  }
-
-  .site-abas {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .site-fluxo {
     min-height: 320px;
-  }
-
-  .site-integra {
-    height: 340px;
-  }
-
-  .site-integra-icone {
-    display: none;
   }
 
   .site-wordmark {
@@ -681,13 +514,6 @@
 
 .site-menu nav {
   gap: 36px;
-}
-
-.site-btn.vidro-claro {
-  border: 1px solid var(--vidro-borda);
-  background: rgba(255, 255, 255, 0.5);
-  box-shadow: var(--vidro-luz);
-  backdrop-filter: blur(8px);
 }
 
 /* CTA principal de vidro azul */
@@ -737,40 +563,7 @@
   overflow: hidden;
 }
 
-.site-brilho {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.site-brilho span {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(120px);
-  animation: site-respira 12s ease-in-out infinite;
-}
-
-.site-brilho span:first-child {
-  left: -220px;
-  top: -260px;
-  width: 760px;
-  height: 560px;
-  background: #60b1ff;
-  opacity: 0.45;
-}
-
-.site-brilho span:last-child {
-  left: -80px;
-  top: -140px;
-  width: 420px;
-  height: 320px;
-  background: #319aff;
-  opacity: 0.35;
-  animation-delay: -6s;
-}
-
-.site-hero::after,
-.site-cta::after {
+.site-hero::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -785,17 +578,6 @@
 }
 
 /* Hero em duas colunas */
-
-.site-hero-grade {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 1.05fr 1fr;
-  align-items: center;
-  gap: 24px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
 
 .site-hero-conteudo.lado {
   max-width: none;
@@ -819,86 +601,22 @@
   justify-content: flex-start;
 }
 
-.site-estrelas {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 22px;
-  padding: 7px 14px 7px 10px;
-  border: 1px solid var(--vidro-borda);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.55);
-  box-shadow: var(--vidro-luz);
-  backdrop-filter: blur(12px);
-  color: var(--texto);
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.site-estrelas span {
-  display: inline-flex;
-  gap: 2px;
-  color: var(--estrela);
-}
-
 /* Vidro nos cards */
 
-.site-bento-visual:not(.gradiente),
 .site-passo,
-.site-caso,
-.site-plano.vidro,
-.site-toggle {
+.site-plano.vidro {
   border: 1px solid var(--vidro-borda);
   background: rgba(255, 255, 255, 0.6);
   box-shadow: var(--vidro-luz), 0 10px 30px rgba(11, 27, 51, 0.05);
   backdrop-filter: blur(20px);
 }
 
-
 .site-plano.vidro {
   box-shadow: var(--vidro-luz), 0 20px 50px rgba(22, 119, 255, 0.16);
 }
 
-.site-bento-item,
-.site-caso,
 .site-plano {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.site-bento-item:hover,
-.site-caso:hover {
-  transform: translateY(-4px);
-}
-
-.site-bento-visual.gradiente {
-  position: relative;
-  overflow: hidden;
-  box-shadow: var(--vidro-luz);
-}
-
-.site-bento-visual.gradiente::before {
-  content: '';
-  position: absolute;
-  inset: -40%;
-  background: conic-gradient(from 0deg, transparent, rgba(160, 240, 255, 0.45), transparent 40%);
-  animation: site-gira 12s linear infinite;
-}
-
-.site-bento-visual.gradiente > * {
-  position: relative;
-}
-
-.site-bento-rostos span {
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: inset 0 4px 4px rgba(255, 255, 255, 0.35);
-}
-
-.site-cta {
-  isolation: isolate;
-}
-
-.site-cta .site-hero-conteudo {
-  z-index: 2;
 }
 
 /* Entrada das seções ao rolar */
@@ -929,19 +647,9 @@
     justify-content: center;
   }
 
-  .site-hero-grade {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
   .site-hero-conteudo.lado h1 {
     font-size: 40px;
     letter-spacing: -1px;
-  }
-
-  .site-orb {
-    width: 300px;
-    height: 300px;
-    transform: none;
   }
 }
 
@@ -1457,8 +1165,7 @@
   to { transform: translateX(-50%) rotate(360deg); }
 }
 
-.site-orbita-icone,
-.site-integra-icone {
+.site-orbita-icone {
   width: 52px;
   height: 52px;
   border-radius: 14px;
@@ -1466,8 +1173,7 @@
   box-shadow: 0 1px 2px rgba(11, 27, 51, 0.06), 0 10px 24px rgba(11, 27, 51, 0.08);
 }
 
-.site-orbita-icone svg,
-.site-integra-icone svg {
+.site-orbita-icone svg {
   width: 24px;
   height: 24px;
 }
@@ -1494,9 +1200,6 @@
 .site-orbita-icone.o6 { right: 8%; top: 230px; left: auto; animation-delay: -5s; }
 .site-orbita-icone.o7 { right: 4%; top: 360px; left: auto; animation-delay: -1.5s; }
 .site-orbita-icone.o8 { right: 13%; top: 480px; left: auto; animation-delay: -2.5s; }
-
-.site-cta .site-orbita-icone.o1 { top: 60px; }
-.site-cta .site-orbita-icone.o5 { top: 50px; }
 
 /* Seção do motion (formulário → discadora → ligação) */
 
@@ -1573,10 +1276,6 @@ img.site-logo-icone,
 img.site-app-icone {
   background: none;
   object-fit: contain;
-}
-
-.site .sem-quebra {
-  white-space: nowrap;
 }
 
 .site-hero-conteudo {
@@ -1784,12 +1483,6 @@ img.site-app-icone {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-}
-
-@media (max-width: 900px) {
-  .site-demo-texto .quebra-desktop {
-    display: none;
   }
 }
 
@@ -2293,38 +1986,9 @@ img.site-app-icone {
   box-shadow: var(--vidro-luz), 0 10px 30px rgba(11, 27, 51, 0.05);
 }
 
-.site-plano-personalizado {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  max-width: 860px;
-  margin: 20px auto 0;
-  padding: 22px 26px;
-  border: 1px solid var(--vidro-borda);
-  border-radius: 20px;
-  background: var(--fundo-suave);
-}
-
-.site-plano-personalizado strong {
-  font-family: 'Fustat', 'Inter', sans-serif;
-  font-size: 18px;
-}
-
-.site-plano-personalizado p {
-  margin: 4px 0 0;
-  color: var(--texto);
-  font-size: 14px;
-}
-
 @media (max-width: 900px) {
   .site-planos {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .site-plano-personalizado {
-    flex-direction: column;
-    align-items: flex-start;
   }
 }
 
@@ -2366,16 +2030,6 @@ html {
   margin-bottom: 18px;
 }
 
-.site-modal-plano {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: #e6f4ff;
-  color: #1677ff;
-  font-size: 12px;
-  font-weight: 700;
-}
-
 .site-modal-topo h3 {
   margin: 10px 0 4px;
   font-family: 'Fustat', 'Inter', sans-serif;
@@ -2385,4 +2039,40 @@ html {
 .site-modal-topo p {
   margin: 0;
   color: #5b6b82;
+}
+
+/* ---------- Performance no celular ---------- */
+
+/* Seções abaixo da dobra só são desenhadas quando chegam perto da tela. */
+.site-secao:not(.site-demo-secao),
+.site-rodape {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
+@media (max-width: 900px) {
+  /* Desfoque de fundo é o efeito mais caro para GPU de celular: troca por fundo sólido. */
+  .site *,
+  .site {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .demo-form,
+  .demo-fila,
+  .demo-chamada,
+  .site-faq-item,
+  .site-plano:not(.destaque) {
+    background: #fff;
+  }
+
+  /* Brilho grande e desfocado pesa no scroll; no mobile fica menor e parado. */
+  .demo-brilho {
+    filter: blur(18px);
+    animation: none;
+  }
+
+  .site-orbita {
+    display: none;
+  }
 }

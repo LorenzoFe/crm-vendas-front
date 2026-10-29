@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Alert, Button, Checkbox, Form, Input, Modal, Result, Select } from 'antd'
+import TemaAntd from '../TemaAntd'
 import { apiPublica, mensagemDeErro } from '../api/client'
 import { mascararTelefone, somenteNumeros, telefoneCompleto, vazioParaNulo } from '../utils/formatar'
 
@@ -76,85 +77,87 @@ export default function SiteFormPlano({ plano, aberto, aoFechar }) {
   }
 
   return (
-    <Modal open={aberto} onCancel={fechar} footer={null} width={480} className="site-modal">
-      {enviado ? (
-        <Result
-          status="success"
-          title="Recebemos seus dados!"
-          subTitle="Fique com o telefone por perto: um especialista vai te ligar em instantes."
-          extra={<Button onClick={fechar}>Fechar</Button>}
-        />
-      ) : (
-        <>
-          <div className="site-modal-topo">
-            <h3>Fale com um especialista</h3>
-            <p>Deixe seus dados e a gente te liga em segundos.</p>
-          </div>
+    <TemaAntd>
+      <Modal open={aberto} onCancel={fechar} footer={null} width={480} className="site-modal">
+        {enviado ? (
+          <Result
+            status="success"
+            title="Recebemos seus dados!"
+            subTitle="Fique com o telefone por perto: um especialista vai te ligar em instantes."
+            extra={<Button onClick={fechar}>Fechar</Button>}
+          />
+        ) : (
+          <>
+            <div className="site-modal-topo">
+              <h3>Fale com um especialista</h3>
+              <p>Deixe seus dados e a gente te liga em segundos.</p>
+            </div>
 
-          {erro && <Alert type="error" message={erro} showIcon style={{ marginBottom: 16 }} />}
+            {erro && <Alert type="error" message={erro} showIcon style={{ marginBottom: 16 }} />}
 
-          <Form form={form} layout="vertical" onFinish={enviar} requiredMark={false}>
-            <Form.Item name="nome" label="Nome" rules={[{ required: true, message: 'Informe seu nome' }]}>
-              <Input placeholder="Seu nome" autoComplete="name" />
-            </Form.Item>
-            <Form.Item
-              name="telefone"
-              label="Telefone"
-              getValueFromEvent={(e) => mascararTelefone(e.target.value)}
-              rules={[
-                { required: true, message: 'Informe seu telefone' },
-                {
-                  validator: (_, valor) =>
-                    !valor || telefoneCompleto(valor)
-                      ? Promise.resolve()
-                      : Promise.reject(new Error('Telefone com DDD, ex.: (34) 99999-9999')),
-                },
-              ]}
-            >
-              <Input placeholder="(34) 99999-9999" inputMode="tel" autoComplete="tel" />
-            </Form.Item>
-            <Form.Item
-              name="email"
-              label="E-mail"
-              rules={[
-                { required: true, message: 'Informe seu e-mail' },
-                { type: 'email', message: 'E-mail inválido' },
-              ]}
-            >
-              <Input placeholder="voce@empresa.com" autoComplete="email" />
-            </Form.Item>
-            <Form.Item
-              name="empresaNome"
-              label="Nome da empresa"
-              rules={[{ required: true, message: 'Informe o nome da empresa' }]}
-            >
-              <Input placeholder="Sua empresa" autoComplete="organization" />
-            </Form.Item>
-            <Form.Item
-              name="faturamento"
-              label="Faixa de faturamento"
-              rules={[{ required: true, message: 'Escolha a faixa de faturamento' }]}
-            >
-              <Select placeholder="Selecione" options={FAIXAS_FATURAMENTO.map((f) => ({ value: f, label: f }))} />
-            </Form.Item>
-            <Form.Item
-              name="consentimento"
-              valuePropName="checked"
-              rules={[
-                {
-                  validator: (_, marcado) =>
-                    marcado ? Promise.resolve() : Promise.reject(new Error('É preciso autorizar o contato')),
-                },
-              ]}
-            >
-              <Checkbox>Autorizo o contato por telefone e e-mail (LGPD).</Checkbox>
-            </Form.Item>
-            <Button type="primary" htmlType="submit" block size="large" loading={enviando}>
-              Quero ser contatado
-            </Button>
-          </Form>
-        </>
-      )}
-    </Modal>
+            <Form form={form} layout="vertical" onFinish={enviar} requiredMark={false}>
+              <Form.Item name="nome" label="Nome" rules={[{ required: true, message: 'Informe seu nome' }]}>
+                <Input placeholder="Seu nome" autoComplete="name" />
+              </Form.Item>
+              <Form.Item
+                name="telefone"
+                label="Telefone"
+                getValueFromEvent={(e) => mascararTelefone(e.target.value)}
+                rules={[
+                  { required: true, message: 'Informe seu telefone' },
+                  {
+                    validator: (_, valor) =>
+                      !valor || telefoneCompleto(valor)
+                        ? Promise.resolve()
+                        : Promise.reject(new Error('Telefone com DDD, ex.: (34) 99999-9999')),
+                  },
+                ]}
+              >
+                <Input placeholder="(34) 99999-9999" inputMode="tel" autoComplete="tel" />
+              </Form.Item>
+              <Form.Item
+                name="email"
+                label="E-mail"
+                rules={[
+                  { required: true, message: 'Informe seu e-mail' },
+                  { type: 'email', message: 'E-mail inválido' },
+                ]}
+              >
+                <Input placeholder="voce@empresa.com" autoComplete="email" />
+              </Form.Item>
+              <Form.Item
+                name="empresaNome"
+                label="Nome da empresa"
+                rules={[{ required: true, message: 'Informe o nome da empresa' }]}
+              >
+                <Input placeholder="Sua empresa" autoComplete="organization" />
+              </Form.Item>
+              <Form.Item
+                name="faturamento"
+                label="Faixa de faturamento"
+                rules={[{ required: true, message: 'Escolha a faixa de faturamento' }]}
+              >
+                <Select placeholder="Selecione" options={FAIXAS_FATURAMENTO.map((f) => ({ value: f, label: f }))} />
+              </Form.Item>
+              <Form.Item
+                name="consentimento"
+                valuePropName="checked"
+                rules={[
+                  {
+                    validator: (_, marcado) =>
+                      marcado ? Promise.resolve() : Promise.reject(new Error('É preciso autorizar o contato')),
+                  },
+                ]}
+              >
+                <Checkbox>Autorizo o contato por telefone e e-mail (LGPD).</Checkbox>
+              </Form.Item>
+              <Button type="primary" htmlType="submit" block size="large" loading={enviando}>
+                Quero ser contatado
+              </Button>
+            </Form>
+          </>
+        )}
+      </Modal>
+    </TemaAntd>
   )
 }
