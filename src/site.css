@@ -428,47 +428,6 @@
 .site-fluxo .a2 { top: 42%; }
 .site-fluxo .a3 { top: 70%; }
 
-/* ---------- Integrações ---------- */
-
-.site-integra {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 460px;
-}
-
-.site-integra .anel {
-  position: absolute;
-  border: 1px solid var(--borda);
-  border-radius: 50%;
-}
-
-.site-integra .r1 { width: 220px; height: 220px; }
-.site-integra .r2 { width: 460px; height: 460px; }
-.site-integra .r3 { width: 760px; height: 760px; }
-
-.site-integra-icone {
-  position: absolute;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: #fff;
-  font-size: 20px;
-  box-shadow: 0 8px 24px rgba(11, 27, 51, 0.1);
-  animation: site-flutua 6s ease-in-out infinite;
-}
-
-.site-integra-icone.i1 { left: calc(50% - 250px); top: 40px; }
-.site-integra-icone.i2 { left: calc(50% - 360px); top: 220px; animation-delay: -1s; }
-.site-integra-icone.i3 { left: calc(50% - 160px); top: 360px; animation-delay: -2s; }
-.site-integra-icone.i4 { right: calc(50% - 300px); top: 60px; animation-delay: -3s; }
-.site-integra-icone.i5 { right: calc(50% - 380px); top: 250px; animation-delay: -4s; }
-.site-integra-icone.i6 { right: calc(50% - 190px); top: 380px; animation-delay: -5s; }
-
 /* ---------- Planos ---------- */
 
 .site-toggle {

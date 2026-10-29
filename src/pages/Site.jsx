@@ -246,28 +246,6 @@ function ComoFunciona() {
   )
 }
 
-function Integracoes() {
-  return (
-    <section className="site-secao">
-      <div className="site-titulo">
-        <h2>Tudo conectado num lugar só</h2>
-        <p>Formulário, discadora, funil e painel conversando entre si, sem copiar e colar.</p>
-      </div>
-      <div className="site-integra">
-        <span className="anel r1" />
-        <span className="anel r2" />
-        <span className="anel r3" />
-        <img className="site-app-icone grande" src="/logo-cortex.png" alt="" />
-        {MARCAS_ORBITA.slice(0, 6).map((logo, i) => (
-          <span key={logo.id} className={`site-integra-icone i${i + 1}`} title={logo.nome}>
-            <LogoMarca logo={logo} />
-          </span>
-        ))}
-      </div>
-    </section>
-  )
-}
-
 function Planos() {
   const [anual, setAnual] = useState(false)
   return (
@@ -460,7 +438,6 @@ export default function Site() {
 
       <SitePorQue />
       <ComoFunciona />
-      <Integracoes />
       <Planos />
 
       <Faq />
