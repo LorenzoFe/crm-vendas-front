@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   ApiOutlined,
@@ -16,6 +16,7 @@ import {
   MailOutlined,
   PhoneOutlined,
   RobotOutlined,
+  StarFilled,
   TeamOutlined,
   ThunderboltOutlined,
   UserOutlined,
@@ -138,16 +139,48 @@ function Orbita() {
   )
 }
 
-function Hero({ id }) {
+function BotaoVidro({ to, children }) {
   return (
-    <div className="site-hero-conteudo" id={id}>
-      <div className="site-prova">
-        <Avatares />
-        <div>
-          <strong>+1.200</strong>
-          <small>leads atendidos na demo</small>
+    <Link to={to} className="site-btn vidro">
+      {children}
+      <span className="site-btn-seta">
+        <ArrowRightOutlined />
+      </span>
+    </Link>
+  )
+}
+
+function Orb({ pequeno = false }) {
+  return (
+    <div className={`site-orb ${pequeno ? 'pequeno' : ''}`} aria-hidden="true">
+      <span className="nucleo" />
+      <span className="liquido" />
+      <span className="brilho" />
+    </div>
+  )
+}
+
+function Hero({ id, lado = false }) {
+  return (
+    <div className={`site-hero-conteudo ${lado ? 'lado' : ''}`} id={id}>
+      {lado ? (
+        <div className="site-estrelas">
+          <span>
+            {[1, 2, 3, 4, 5].map((n) => (
+              <StarFilled key={n} />
+            ))}
+          </span>
+          Nota 4,9/5 de quem testou na demo
         </div>
-      </div>
+      ) : (
+        <div className="site-prova">
+          <Avatares />
+          <div>
+            <strong>+1.200</strong>
+            <small>leads atendidos na demo</small>
+          </div>
+        </div>
+      )}
       <h1>
         Responda antes,
         <br />
@@ -158,9 +191,7 @@ function Hero({ id }) {
         sozinho, do formulário ao fechamento.
       </p>
       <div className="site-botoes">
-        <Link to="/login" className="site-btn escuro">
-          Entrar no CRM
-        </Link>
+        <BotaoVidro to="/login">Começar agora</BotaoVidro>
         <Link to="/area-cliente" className="site-btn claro">
           Ver demonstração
         </Link>
@@ -477,7 +508,7 @@ function Planos() {
       </div>
       <div className="site-planos">
         {PLANOS.map((p) => (
-          <div key={p.nome} className={`site-plano ${p.destaque ? 'destaque' : ''}`}>
+          <div key={p.nome} className={`site-plano ${p.destaque ? 'destaque vidro' : ''}`}>
             <div className="nome">
               {p.icone} {p.nome}
             </div>
@@ -540,9 +571,35 @@ function Rodape() {
   )
 }
 
+// Revela cada seção com fade-up quando ela entra na tela.
+function useRevelarAoRolar(ref) {
+  useEffect(() => {
+    const alvos = ref.current.querySelectorAll('.site-secao, .site-stack, .site-cta, .site-mock')
+    const observador = new IntersectionObserver(
+      (entradas) => {
+        entradas.forEach((entrada) => {
+          if (entrada.isIntersecting) {
+            entrada.target.classList.add('visivel')
+            observador.unobserve(entrada.target)
+          }
+        })
+      },
+      { threshold: 0.12 },
+    )
+    alvos.forEach((alvo) => {
+      alvo.classList.add('revelar')
+      observador.observe(alvo)
+    })
+    return () => observador.disconnect()
+  }, [ref])
+}
+
 export default function Site() {
+  const raiz = useRef(null)
+  useRevelarAoRolar(raiz)
+
   return (
-    <div className="site">
+    <div className="site" ref={raiz}>
       <header className="site-menu">
         <Logo />
         <nav>
@@ -552,14 +609,20 @@ export default function Site() {
             </a>
           ))}
         </nav>
-        <Link to="/login" className="site-btn escuro pequeno">
-          Entrar
+        <Link to="/login" className="site-btn vidro-claro pequeno">
+          Entrar <ArrowRightOutlined />
         </Link>
       </header>
 
       <section className="site-hero">
-        <Orbita />
-        <Hero />
+        <div className="site-brilho" aria-hidden="true">
+          <span />
+          <span />
+        </div>
+        <div className="site-hero-grade">
+          <Hero lado />
+          <Orb />
+        </div>
         <MockPainel />
       </section>
 
@@ -581,6 +644,7 @@ export default function Site() {
 
       <section className="site-cta">
         <Orbita />
+        <Orb pequeno />
         <Hero id="comecar" />
       </section>
 
