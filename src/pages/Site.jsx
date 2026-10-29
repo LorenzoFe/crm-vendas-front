@@ -267,6 +267,7 @@ function Planos() {
           <div key={p.nome} className={`site-plano ${p.destaque ? 'destaque vidro' : ''}`}>
             <div className="nome">
               {p.icone} {p.nome}
+              {p.destaque && <span className="site-plano-tag">Mais escolhido</span>}
             </div>
             <p>{p.descricao}</p>
             <div className="preco">
