@@ -251,7 +251,7 @@ function Planos() {
   return (
     <section className="site-secao" id="planos">
       <div className="site-titulo">
-        <h2>Planos simples, sem surpresa</h2>
+        <h2>Acelere suas vendas</h2>
         <p>Cada plano libera um conjunto de funcionalidades. Mude quando quiser.</p>
       </div>
       <div className="site-toggle">
