@@ -2533,3 +2533,30 @@ img.site-app-icone {
 .site-hero .site-orbita-icone.o4 { top: 360px; }
 .site-hero .site-orbita-icone.o8 { top: 380px; }
 .site-hero .site-orbita-icone.o3 { top: 300px; }
+
+/* Hero mais alto e mais longe do menu; a órbita desce junto com o conteúdo. */
+.site-hero {
+  padding-top: 220px;
+  padding-bottom: 150px;
+}
+
+.site-hero .site-orbita::before,
+.site-hero .site-arco.a1 {
+  top: 0;
+}
+
+.site-hero .site-orbita::after,
+.site-hero .site-arco.a2 {
+  top: -140px;
+}
+
+.site-hero .site-orbita-icone {
+  margin-top: 60px;
+}
+
+@media (max-width: 900px) {
+  .site-hero {
+    padding-top: 150px;
+    padding-bottom: 64px;
+  }
+}
