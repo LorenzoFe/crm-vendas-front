@@ -55,16 +55,16 @@ const PLANOS = [
     nome: 'Essencial',
     icone: <UserOutlined />,
     descricao: 'Para quem está organizando o primeiro funil.',
-    mensal: 49,
+    mensal: 149,
     itens: ['Até 3 usuários', 'Funil Kanban', 'Empresas e contatos', 'Tarefas e notas', 'Suporte por e-mail'],
   },
   {
     nome: 'Equipe',
     icone: <TeamOutlined />,
     descricao: 'Para times de pré-vendas que vivem de inbound.',
-    mensal: 99,
+    mensal: 279,
     destaque: true,
-    itens: ['Usuários ilimitados', 'Área do Cliente (formulário)', 'Discadora integrada', 'Propostas e histórico', 'Painel de desempenho', 'Perfis e permissões'],
+    itens: ['Até 10 usuários', 'Área do Cliente (formulário)', 'Discadora integrada', 'Propostas e histórico', 'Painel de desempenho', 'Perfis e permissões'],
   },
 ]
 
@@ -247,20 +247,11 @@ function ComoFunciona() {
 }
 
 function Planos() {
-  const [anual, setAnual] = useState(false)
   return (
     <section className="site-secao" id="planos">
       <div className="site-titulo">
         <h2>Acelere suas vendas</h2>
         <p>Cada plano libera um conjunto de funcionalidades. Mude quando quiser.</p>
-      </div>
-      <div className="site-toggle">
-        <button className={!anual ? 'ativo' : ''} onClick={() => setAnual(false)}>
-          Mensal
-        </button>
-        <button className={anual ? 'ativo' : ''} onClick={() => setAnual(true)}>
-          Anual
-        </button>
       </div>
       <div className="site-planos">
         {PLANOS.map((p) => (
@@ -271,8 +262,8 @@ function Planos() {
             </div>
             <p>{p.descricao}</p>
             <div className="preco">
-              <strong>R$ {anual ? Math.round(p.mensal * 0.8) : p.mensal}</strong>
-              <small>/usuário/mês</small>
+              <strong>R$ {p.mensal}</strong>
+              <small>/mês</small>
             </div>
             <ul>
               {p.itens.map((item) => (
