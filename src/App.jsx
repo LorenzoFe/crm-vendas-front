@@ -11,11 +11,14 @@ import OportunidadeDetalhe from './pages/OportunidadeDetalhe'
 import Painel from './pages/Painel'
 import Tarefas from './pages/Tarefas'
 import Usuarios from './pages/Usuarios'
+import AreaCliente from './pages/AreaCliente'
+import Interessados from './pages/Interessados'
 
 export default function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
+      <Route path="/area-cliente" element={<AreaCliente />} />
       <Route element={<RotaProtegida />}>
         <Route element={<AppLayout />}>
           <Route path="/" element={<Kanban />} />
@@ -27,6 +30,7 @@ export default function App() {
           <Route path="/contatos" element={<Contatos />} />
           <Route path="/produtos" element={<Produtos />} />
           <Route path="/config/usuarios" element={<Usuarios />} />
+          <Route path="/interessados" element={<Interessados />} />
         </Route>
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
