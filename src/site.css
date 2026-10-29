@@ -2469,3 +2469,37 @@ img.site-app-icone {
   -webkit-mask-image: linear-gradient(#000 65%, transparent 100%);
   mask-image: linear-gradient(#000 65%, transparent 100%);
 }
+
+/* Seção do motion mais perto do hero; no mobile a animação vem antes do texto. */
+.site-hero {
+  padding-bottom: 40px;
+}
+
+.site-demo-secao {
+  padding-top: 24px;
+}
+
+@media (max-width: 900px) {
+  .site-hero {
+    padding-bottom: 24px;
+  }
+
+  .site-demo-secao {
+    padding-top: 8px;
+    gap: 8px;
+  }
+
+  .site-demo-secao .demo {
+    order: -1;
+  }
+}
+
+/* Mobile: motion ocupando a largura da tela (540px de base → ~360px), sem sobra embaixo. */
+@media (max-width: 900px) {
+  .site-demo-secao .demo {
+    --escala: min(1, calc((100vw - 32px) / 540px));
+    height: 500px;
+    margin-bottom: calc(500px * (var(--escala) - 1));
+    transform: scale(var(--escala));
+  }
+}
