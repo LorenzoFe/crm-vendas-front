@@ -328,7 +328,7 @@ const PERGUNTAS = [
 ]
 
 function Faq() {
-  const [aberta, setAberta] = useState(0)
+  const [aberta, setAberta] = useState(-1)
   return (
     <section className="site-secao site-faq" id="faq">
       <div className="site-titulo">
