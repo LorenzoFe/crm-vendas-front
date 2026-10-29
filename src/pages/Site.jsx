@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
+  ApiOutlined,
   ArrowRightOutlined,
   BellOutlined,
   CheckCircleFilled,
@@ -53,18 +54,36 @@ const PASSOS = [
 const PLANOS = [
   {
     nome: 'Essencial',
-    icone: <UserOutlined />,
-    descricao: 'Para quem está organizando o primeiro funil.',
-    mensal: 149,
-    itens: ['Até 3 usuários', 'Funil Kanban', 'Empresas e contatos', 'Tarefas e notas', 'Suporte por e-mail'],
+    icone: <TeamOutlined />,
+    descricao: 'Tudo o que um time de inbound precisa para responder em segundos.',
+    preco: 'R$ 249',
+    periodo: '/mês',
+    destaque: true,
+    itens: [
+      'Até 5 usuários',
+      'Área do Cliente (formulário)',
+      'Discadora integrada',
+      'Distribuição de leads',
+      'Funil Kanban e propostas',
+      'Painel de desempenho',
+      'Perfis e permissões',
+    ],
+    botao: { rotulo: 'Começar agora', para: '/login' },
   },
   {
-    nome: 'Equipe',
-    icone: <TeamOutlined />,
-    descricao: 'Para times de pré-vendas que vivem de inbound.',
-    mensal: 279,
-    destaque: true,
-    itens: ['Até 10 usuários', 'Área do Cliente (formulário)', 'Discadora integrada', 'Propostas e histórico', 'Painel de desempenho', 'Perfis e permissões'],
+    nome: 'Business',
+    icone: <ApiOutlined />,
+    descricao: 'Para operações maiores, com o Córtex sob medida para o seu processo.',
+    preco: 'Sob consulta',
+    itens: [
+      'Mais de 5 usuários',
+      'Tudo do Essencial',
+      'Implantação acompanhada',
+      'Personalização do sistema',
+      'Integração com outras discadoras e ferramentas',
+      'Suporte prioritário',
+    ],
+    botao: { rotulo: 'Falar com a gente', para: '/area-cliente' },
   },
 ]
 
@@ -262,8 +281,8 @@ function Planos() {
             </div>
             <p>{p.descricao}</p>
             <div className="preco">
-              <strong>R$ {p.mensal}</strong>
-              <small>/mês</small>
+              <strong>{p.preco}</strong>
+              {p.periodo && <small>{p.periodo}</small>}
             </div>
             <ul>
               {p.itens.map((item) => (
@@ -272,20 +291,11 @@ function Planos() {
                 </li>
               ))}
             </ul>
-            <Link to="/login" className={`site-btn ${p.destaque ? 'escuro' : 'claro'} cheio`}>
-              Começar agora
+            <Link to={p.botao.para} className={`site-btn ${p.destaque ? 'escuro' : 'claro'} cheio`}>
+              {p.botao.rotulo}
             </Link>
           </div>
         ))}
-      </div>
-      <div className="site-plano-personalizado">
-        <div>
-          <strong>Precisa de um plano personalizado?</strong>
-          <p>Vários funis, mais gestores ou integração com outra discadora: a gente monta junto com você.</p>
-        </div>
-        <Link to="/area-cliente" className="site-btn escuro">
-          Falar com a gente
-        </Link>
       </div>
     </section>
   )
