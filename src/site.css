@@ -2319,3 +2319,56 @@ img.site-app-icone {
     padding-right: 70px;
   }
 }
+
+/* Planos: dois cards + linha do plano personalizado */
+.site-planos {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.site-plano:not(.destaque) {
+  border: 1px solid var(--vidro-borda);
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: var(--vidro-luz), 0 10px 30px rgba(11, 27, 51, 0.05);
+}
+
+.site-plano-personalizado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 860px;
+  margin: 20px auto 0;
+  padding: 22px 26px;
+  border: 1px solid var(--vidro-borda);
+  border-radius: 20px;
+  background: var(--fundo-suave);
+}
+
+.site-plano-personalizado strong {
+  font-family: 'Fustat', 'Inter', sans-serif;
+  font-size: 18px;
+}
+
+.site-plano-personalizado p {
+  margin: 4px 0 0;
+  color: var(--texto);
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .site-planos {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .site-plano-personalizado {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.site-planos .site-plano.destaque {
+  padding: 26px;
+}

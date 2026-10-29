@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
-  ApiOutlined,
   ArrowRightOutlined,
   BellOutlined,
   CheckCircleFilled,
@@ -66,13 +65,6 @@ const PLANOS = [
     mensal: 99,
     destaque: true,
     itens: ['Usuários ilimitados', 'Área do Cliente (formulário)', 'Discadora integrada', 'Propostas e histórico', 'Painel de desempenho', 'Perfis e permissões'],
-  },
-  {
-    nome: 'Operação',
-    icone: <ApiOutlined />,
-    descricao: 'Para operações com vários funis e gestores.',
-    mensal: 199,
-    itens: ['Tudo do Equipe', 'Vários funis', 'Relatórios avançados', 'IA sobre a base (em breve)', 'Suporte prioritário'],
   },
 ]
 
@@ -315,6 +307,15 @@ function Planos() {
             </Link>
           </div>
         ))}
+      </div>
+      <div className="site-plano-personalizado">
+        <div>
+          <strong>Precisa de um plano personalizado?</strong>
+          <p>Vários funis, mais gestores ou integração com outra discadora: a gente monta junto com você.</p>
+        </div>
+        <Link to="/area-cliente" className="site-btn escuro">
+          Falar com a gente
+        </Link>
       </div>
     </section>
   )
