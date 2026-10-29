@@ -184,25 +184,12 @@ function DemoIntegracao() {
       <div className="site-demo-texto">
         <small>Speed-to-lead</small>
         <h2>
-          Do formulário à ligação
-          <br />
-          em segundos
+          Nós identificamos o SDR disponível e ligamos automaticamente
         </h2>
         <p>
           O lead preenche o formulário, o Córtex manda o número direto para a fila da discadora e o
           primeiro SDR livre já recebe a chamada. Sem copiar telefone, sem esperar o dia seguinte.
         </p>
-        <ul>
-          <li>
-            <CheckCircleFilled /> Interesse registrado com aceite LGPD
-          </li>
-          <li>
-            <CheckCircleFilled /> Número na fila da Vonix na hora
-          </li>
-          <li>
-            <CheckCircleFilled /> Status da ligação de volta no CRM
-          </li>
-        </ul>
         <BotaoVidro to="/area-cliente">Testar o formulário</BotaoVidro>
       </div>
       <SiteHeroDemo />

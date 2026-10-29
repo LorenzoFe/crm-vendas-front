@@ -2581,3 +2581,25 @@ img.site-app-icone {
     align-items: center;
   }
 }
+
+@media (max-width: 900px) {
+  .site-demo-texto .quebra-desktop {
+    display: none;
+  }
+}
+
+.site-demo-texto h2 {
+  font-size: 38px;
+  text-wrap: balance;
+}
+
+@media (max-width: 900px) {
+  .site-demo-texto h2 {
+    font-size: 28px;
+  }
+}
+
+/* Sem a lista de checks: o botão vem logo depois do parágrafo. */
+.site-demo-texto p {
+  margin-bottom: 30px;
+}
