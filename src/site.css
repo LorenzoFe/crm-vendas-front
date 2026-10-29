@@ -428,68 +428,6 @@
 .site-fluxo .a2 { top: 42%; }
 .site-fluxo .a3 { top: 70%; }
 
-/* ---------- Casos ---------- */
-
-.site-casos {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(240px, 1fr));
-  gap: 18px;
-  overflow-x: auto;
-  padding-bottom: 8px;
-}
-
-.site-caso {
-  display: flex;
-  flex-direction: column;
-  padding: 18px;
-  border: 1px solid var(--borda);
-  border-radius: 18px;
-}
-
-.site-caso-ilustra {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 150px;
-  margin-bottom: 18px;
-  border-radius: 12px;
-  background: var(--fundo-suave);
-  color: var(--azul);
-  font-size: 44px;
-}
-
-.site-caso h3 {
-  font-size: 15px;
-}
-
-.site-caso p {
-  flex: 1;
-  margin: 8px 0 18px;
-  color: var(--texto);
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-.site-caso a {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.site-caso a span {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: var(--tinta);
-  color: #fff;
-  font-size: 10px;
-}
-
 /* ---------- Integrações ---------- */
 
 .site-integra {

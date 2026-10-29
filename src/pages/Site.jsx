@@ -3,22 +3,14 @@ import { Link } from 'react-router-dom'
 import {
   ApiOutlined,
   ArrowRightOutlined,
-  BarChartOutlined,
   BellOutlined,
-  CalendarOutlined,
   CheckCircleFilled,
   DownOutlined,
-  ClockCircleOutlined,
   DatabaseOutlined,
-  FormOutlined,
   GithubOutlined,
   InstagramOutlined,
   LinkedinOutlined,
-  PhoneOutlined,
-  RobotOutlined,
-  StarFilled,
   TeamOutlined,
-  ThunderboltOutlined,
   UserOutlined,
 } from '@ant-design/icons'
 import SiteHeroDemo from './SiteHeroDemo'
@@ -57,13 +49,6 @@ const PASSOS = [
     titulo: 'O gestor enxerga tudo',
     texto: 'Painel com leads por estágio, conversão, motivos de perda e o desempenho de cada vendedor.',
   },
-]
-
-const CASOS = [
-  { icone: <ThunderboltOutlined />, titulo: 'Speed-to-lead de verdade.', texto: 'Lead novo vai para a discadora no mesmo minuto em que preenche o formulário.' },
-  { icone: <TeamOutlined />, titulo: 'Pré-vendas organizado.', texto: 'Fila de interessados com status da ligação: na fila, atendido, caixa postal ou não atendido.' },
-  { icone: <BarChartOutlined />, titulo: 'Funil sem planilha.', texto: 'Arraste a oportunidade entre estágios e veja o valor do pipeline atualizado na hora.' },
-  { icone: <FormOutlined />, titulo: 'Propostas em um clique.', texto: 'Gere a proposta a partir dos itens da oportunidade, envie e registre o aceite.' },
 ]
 
 const PLANOS = [
@@ -264,32 +249,6 @@ function ComoFunciona() {
             <path d="M80 50 V110 M80 150 V250 M80 130 H200 M200 70 V230 M200 70 H260 M200 150 H260 M200 230 H260" />
           </svg>
         </div>
-      </div>
-    </section>
-  )
-}
-
-function Casos() {
-  return (
-    <section className="site-secao">
-      <div className="site-titulo esquerda">
-        <h2>
-          Veja como o Córtex
-          <br />
-          resolve o dia a dia do inbound.
-        </h2>
-      </div>
-      <div className="site-casos">
-        {CASOS.map((c) => (
-          <div key={c.titulo} className="site-caso">
-            <div className="site-caso-ilustra">{c.icone}</div>
-            <h3>{c.titulo}</h3>
-            <p>{c.texto}</p>
-            <a href="#planos">
-              Saiba mais <span><ArrowRightOutlined /></span>
-            </a>
-          </div>
-        ))}
       </div>
     </section>
   )
@@ -500,7 +459,6 @@ export default function Site() {
 
       <SitePorQue />
       <ComoFunciona />
-      <Casos />
       <Integracoes />
       <Planos />
 
