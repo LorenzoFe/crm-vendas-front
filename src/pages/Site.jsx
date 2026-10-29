@@ -32,7 +32,6 @@ const LINKS_MENU = [
   { href: '#recursos', rotulo: 'Recursos' },
   { href: '#como-funciona', rotulo: 'Como funciona' },
   { href: '#planos', rotulo: 'Planos' },
-  { href: '#depoimentos', rotulo: 'Depoimentos' },
 ]
 
 const PASSOS = [
@@ -63,13 +62,6 @@ const CASOS = [
   { icone: <TeamOutlined />, titulo: 'Pré-vendas organizado.', texto: 'Fila de interessados com status da ligação: na fila, atendido, caixa postal ou não atendido.' },
   { icone: <BarChartOutlined />, titulo: 'Funil sem planilha.', texto: 'Arraste a oportunidade entre estágios e veja o valor do pipeline atualizado na hora.' },
   { icone: <FormOutlined />, titulo: 'Propostas em um clique.', texto: 'Gere a proposta a partir dos itens da oportunidade, envie e registre o aceite.' },
-]
-
-const DEPOIMENTOS = [
-  { data: '12 out 2026', texto: '“Antes a gente ligava pro lead no dia seguinte. Agora a discadora já liga enquanto ele ainda está com o site aberto.”', nome: 'Ana Ribeiro', cargo: 'Gestora comercial' },
-  { foto: true, nome: 'Rafael Costa', cargo: 'Head de pré-vendas' },
-  { data: '18 out 2026', texto: '“O funil ficou claro pro time inteiro. Cada um sabe o que precisa fazer hoje sem eu cobrar no grupo.”', nome: 'Marcos Lima', cargo: 'Coordenador de vendas' },
-  { data: '24 out 2026', texto: '“O painel de desempenho acabou com a discussão de quem vendeu mais. O número está lá.”', nome: 'Juliana Alves', cargo: 'Diretora comercial' },
 ]
 
 const PLANOS = [
@@ -479,42 +471,6 @@ function Casos() {
   )
 }
 
-function Depoimentos() {
-  return (
-    <section className="site-secao site-fundo" id="depoimentos">
-      <div className="site-titulo esquerda">
-        <h2>Quem usa, recomenda</h2>
-        <p>Times comerciais que trocaram a planilha pelo Córtex.</p>
-      </div>
-      <div className="site-depoimentos">
-        {DEPOIMENTOS.map((d) =>
-          d.foto ? (
-            <div key={d.nome} className="site-depoimento foto">
-              <UserOutlined />
-              <div>
-                <strong>{d.nome}</strong>
-                <small>{d.cargo}</small>
-              </div>
-            </div>
-          ) : (
-            <div key={d.nome} className="site-depoimento">
-              <small>{d.data}</small>
-              <p>{d.texto}</p>
-              <div className="autor">
-                <span>{d.nome.charAt(0)}</span>
-                <div>
-                  <strong>{d.nome}</strong>
-                  <small>{d.cargo}</small>
-                </div>
-              </div>
-            </div>
-          ),
-        )}
-      </div>
-    </section>
-  )
-}
-
 function Integracoes() {
   return (
     <section className="site-secao">
@@ -671,7 +627,6 @@ export default function Site() {
       <Bento />
       <ComoFunciona />
       <Casos />
-      <Depoimentos />
       <Integracoes />
       <Planos />
 

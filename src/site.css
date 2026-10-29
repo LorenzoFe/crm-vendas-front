@@ -788,85 +788,6 @@
   font-size: 10px;
 }
 
-/* ---------- Depoimentos ---------- */
-
-.site-depoimentos {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
-}
-
-.site-depoimento {
-  display: flex;
-  flex-direction: column;
-  min-height: 300px;
-  padding: 20px;
-  border-radius: 18px;
-  background: #fff;
-}
-
-.site-depoimento > small {
-  color: var(--texto);
-  font-size: 12px;
-}
-
-.site-depoimento p {
-  flex: 1;
-  margin: 40px 0 20px;
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.site-depoimento .autor {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.site-depoimento .autor > span {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: var(--azul);
-  color: #fff;
-  font-weight: 700;
-}
-
-.site-depoimento strong,
-.site-depoimento .autor small {
-  display: block;
-  font-size: 13px;
-}
-
-.site-depoimento .autor small {
-  color: var(--texto);
-  font-size: 11px;
-}
-
-.site-depoimento.foto {
-  position: relative;
-  justify-content: flex-end;
-  background: linear-gradient(160deg, #bae0ff, var(--azul-escuro));
-  color: #fff;
-  overflow: hidden;
-}
-
-.site-depoimento.foto > .anticon {
-  position: absolute;
-  left: 50%;
-  top: 42%;
-  transform: translate(-50%, -50%);
-  font-size: 120px;
-  opacity: 0.35;
-}
-
-.site-depoimento.foto small {
-  color: rgba(255, 255, 255, 0.8);
-}
-
 /* ---------- Integrações ---------- */
 
 .site-integra {
@@ -1102,7 +1023,6 @@
   .site-bento,
   .site-passo,
   .site-planos,
-  .site-depoimentos,
   .site-rodape-links {
     grid-template-columns: 1fr;
   }
@@ -1409,7 +1329,6 @@
 .site-bento-visual:not(.gradiente),
 .site-passo,
 .site-caso,
-.site-depoimento:not(.foto),
 .site-plano.vidro,
 .site-toggle,
 .site-mock {
@@ -1430,14 +1349,12 @@
 
 .site-bento-item,
 .site-caso,
-.site-depoimento,
 .site-plano {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .site-bento-item:hover,
-.site-caso:hover,
-.site-depoimento:hover {
+.site-caso:hover {
   transform: translateY(-4px);
 }
 
